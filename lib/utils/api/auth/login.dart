@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:daladala_smart/utils/providers/shareddate_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
+String apiKey = !;
 class loginAuth {
   var language;
   getValidationData() {
@@ -15,7 +16,7 @@ class loginAuth {
 
   Future login(
       BuildContext context, String username, String password, language) async {
-    const url = '${murl}authentication/login.php';
+    const url = '${dotenv.env['API_KEY']}authentication/login.php';
     var response = await http.post(Uri.parse(url), body: {
       "username": username.toString(),
       "password": password.toString(),
