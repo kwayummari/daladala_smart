@@ -1,4 +1,4 @@
-import 'package:zanmutm_pos_client/src/models/format_type.dart';
+import 'package:daladala_smart/src/models/format_type.dart';
 import 'package:intl/intl.dart';
 
 final currency = NumberFormat("#,##0.00", "en_US");
