@@ -17,8 +17,6 @@ class registeringAuth {
       String fullname,
       String language) async {
     if (password.toString() == control_password.toString()) {
-      // print(password);
-      // print(control_password);
       print(language);
       const url = '${murl}authentication/registration.php';
       var response = await http.post(Uri.parse(url), body: {
