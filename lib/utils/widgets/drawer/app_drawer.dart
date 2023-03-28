@@ -1,4 +1,4 @@
-import 'package:daladala_smart/widgets/text/text.dart';
+import 'package:daladala_smart/utils/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
