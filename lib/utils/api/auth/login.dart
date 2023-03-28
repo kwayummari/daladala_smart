@@ -1,14 +1,11 @@
 import 'dart:convert';
 
+import 'package:daladala_smart/utils/providers/shareddate_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:wgnrr/api/const.dart';
-import 'package:wgnrr/models/client/home.dart';
-import 'package:wgnrr/models/health_care_provider/home.dart';
-import 'package:wgnrr/provider/shared_data.dart';
 
 class loginAuth {
   var language;
@@ -39,8 +36,8 @@ class loginAuth {
       );
     } else if (data == "Health Care Providers") {
       await done(context);
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Homepage_hcp('')));
+      // Navigator.of(context).pushReplacement(
+      //     MaterialPageRoute(builder: (context) => Homepage_hcp('')));
       final SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       sharedPreferences.setString('username', username.toString());
@@ -84,8 +81,8 @@ class loginAuth {
       textColor: Colors.white,
       fontSize: 15.0,
     );
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => Homepage('')));
+    // Navigator.of(context)
+    //     .pushReplacement(MaterialPageRoute(builder: (context) => Homepage('')));
   } }
 
   done(BuildContext context) async {
