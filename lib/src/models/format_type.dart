@@ -1,1 +1,0 @@
-enum FormatType { currency, date }
