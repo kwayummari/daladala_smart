@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
               ),
               Image.asset('assets/logo1.png'),
               SizedBox(
-                height: 20,
+                height: 30,
               ),
               AppText(
                 txt: 'WELCOME BACK',
@@ -52,6 +52,9 @@ class _LoginState extends State<Login> {
                 size: 15,
                 weight: FontWeight.w400,
                 color: HexColor('#ffffff'),
+              ),
+              SizedBox(
+                height: 30,
               ),
               AppInputText(
                 textfieldcontroller: username,
@@ -87,7 +90,7 @@ class _LoginState extends State<Login> {
                     )),
               ),
               SizedBox(
-                height: 170,
+                height: 100,
               ),
               Container(
                 width: 350,

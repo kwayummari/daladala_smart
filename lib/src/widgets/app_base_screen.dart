@@ -1,6 +1,5 @@
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class AppBaseScreen extends StatelessWidget {
   final Widget child;

@@ -113,8 +113,8 @@ class _RegistrationState extends State<Registration> {
                         padding: const EdgeInsets.only(
                             left: 12, right: 8, top: 8, bottom: 8),
                         child: GestureDetector(
-                          onTap: () => Navigator.pushNamed(
-                              context, RouteNames.registration),
+                          onTap: () =>
+                              Navigator.pushNamed(context, RouteNames.login),
                           child: Row(
                             children: [
                               AppText(

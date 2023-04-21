@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:daladala_smart/routes/route-names.dart';
 
-import '../connection/dio/api.dart';
+import '../api/login.dart';
 
 class loginService {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
