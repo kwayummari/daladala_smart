@@ -6,15 +6,20 @@ class AppButton extends StatelessWidget {
   final String label;
   final Color bcolor;
   final double borderRadius;
+  var weight;
   final Color textColor;
+  double size;
 
-  const AppButton(
+   AppButton(
       {Key? key,
       required this.onPress,
       required this.label,
       required this.borderRadius,
       required this.textColor,
-      required this.bcolor})
+      this.weight,
+      required this.bcolor,
+      required this.size
+      })
       : super(key: key);
 
   @override
@@ -29,6 +34,6 @@ class AppButton extends StatelessWidget {
           ),
         ),
         onPressed: () => onPress(),
-        child: AppText(txt: label, color: textColor, size: 15,));
+        child: AppText(txt: label, color: textColor, size: size, weight: weight,));
   }
 }

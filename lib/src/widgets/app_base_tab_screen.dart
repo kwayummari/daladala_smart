@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
 
 class AppBaseTabScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class AppBaseTabScreen extends StatelessWidget {
               image: const AssetImage("assets/images/logo.jpeg"),
               fit: BoxFit.fitWidth,
               colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                  AppConst.black.withOpacity(0.2), BlendMode.dstATop),
             ),
           ),
           child: child),

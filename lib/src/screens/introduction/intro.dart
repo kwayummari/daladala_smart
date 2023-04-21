@@ -1,5 +1,8 @@
+import 'package:daladala_smart/src/functions/slide.dart';
 import 'package:daladala_smart/src/screens/introduction/slides.dart';
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:intro_slider/intro_slider.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -13,29 +16,52 @@ class _IntroScreenState extends State<IntroScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   final List<Slide> slides = [
     Slide(
-      title: "Welcome to MyApp",
-      description: "MyApp is an awesome app that does amazing things!",
-      backgroundColor: Colors.redAccent,
+      title: "Let\'s Travel",
+      description: "Move Purposefully!",
+      backgroundColor: AppConst.primary,
     ),
     Slide(
-      title: "Explore the Features",
-      description:
-          "MyApp has a lot of cool features that you will love to explore!",
+      title: "Let\'s Travel",
+      description: "Move Purposefully!",
+      backgroundColor: AppConst.primary,
     ),
     Slide(
-      title: "Start Using MyApp",
-      description:
-          "Are you ready to start using MyApp and see what it can do for you?",
+      title: "Let\'s Travel",
+      description: "Move Purposefully!",
+      backgroundColor: AppConst.primary,
     ),
   ];
+  Color activeColor = const Color(0xFF00967B);
+  Color inactiveColor = Color.fromARGB(255, 255, 255, 255);
+  double sizeIndicator = 20;
 
   @override
   Widget build(BuildContext context) {
     return IntroSlider(
-      renderDoneBtn: Text("Done"),
-      renderNextBtn: Text("Next"),
-      renderSkipBtn: Text("Skip"),
-      listCustomTabs: slides
-    );
+        isShowNextBtn: false,
+        isShowPrevBtn: false,
+        isShowSkipBtn: false,
+        isShowDoneBtn: false,
+        isScrollable: true,
+        curveScroll: Curves.easeInOutCubicEmphasized,
+        scrollPhysics: const BouncingScrollPhysics(),
+        indicatorConfig: IndicatorConfig(
+          sizeIndicator: sizeIndicator,
+          indicatorWidget: Container(
+            width: sizeIndicator,
+            height: 10,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4), color: inactiveColor),
+          ),
+          activeIndicatorWidget: Container(
+            width: sizeIndicator,
+            height: 10,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4), color: activeColor),
+          ),
+          spaceBetweenIndicator: 10,
+          typeIndicatorAnimation: TypeIndicatorAnimation.sliding,
+        ),
+        listCustomTabs: slides);
   }
 }

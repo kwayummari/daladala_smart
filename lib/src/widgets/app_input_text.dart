@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
@@ -27,56 +28,56 @@ class AppInputText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onChanged: onChange,
-      obscureText: obscure,
-      obscuringCharacter: '*',
-      controller: textfieldcontroller,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        label: Container(
-          color: HexColor('#e7d4d3'),
-          child: AppText(
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+      child: TextFormField(
+        onChanged: onChange,
+        obscureText: obscure,
+        obscuringCharacter: '*',
+        controller: textfieldcontroller,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          label: AppText(
             txt: label,
             size: 15,
-            color: Colors.black,
+            color: AppConst.white,
           ),
+          filled: true,
+          fillColor: fillcolor,
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: BorderSide(color: AppConst.black),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: BorderSide(color: AppConst.black),
+          ),
+          prefixIcon: icon,
+          suffixIcon: suffixicon,
         ),
-        filled: true,
-        fillColor: fillcolor,
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0),
-          borderSide: BorderSide(color: HexColor('#000000')),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0),
-          borderSide: BorderSide(color: HexColor('#000000')),
-        ),
-        prefixIcon: icon,
-        suffixIcon: suffixicon,
-      ),
-      validator: (value) {
-        RegExp regex = RegExp(
-                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~.]).{8,}$');
-        if (isemail) {
-          if (value!.isNotEmpty) {
-            return null;
-          } else if (value.isEmpty) {
-            return "THis field cannot be empty";
-          } else if (!regex.hasMatch(value)) {
-                      return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
-                    }
-        } else {
-          if (value!.isNotEmpty) {
-            return null;
-          } else if (value.isEmpty) {
-            return "THis field cannot be empty";
-            ;
+        validator: (value) {
+          RegExp regex = RegExp(
+              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~.]).{8,}$');
+          if (isemail) {
+            if (value!.isNotEmpty) {
+              return null;
+            } else if (value.isEmpty) {
+              return "THis field cannot be empty";
+            } else if (!regex.hasMatch(value)) {
+              return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
+            }
+          } else {
+            if (value!.isNotEmpty) {
+              return null;
+            } else if (value.isEmpty) {
+              return "THis field cannot be empty";
+              ;
+            }
           }
-        }
-      },
+        },
+      ),
     );
   }
 }

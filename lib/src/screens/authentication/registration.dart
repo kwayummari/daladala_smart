@@ -1,11 +1,9 @@
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:daladala_smart/routes/route-names.dart';
 import 'package:daladala_smart/src/service/registration.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
-import 'package:daladala_smart/src/widgets/app_card.dart';
-import 'package:daladala_smart/src/widgets/app_container.dart';
 import 'package:daladala_smart/src/widgets/app_input_text.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 
@@ -18,9 +16,7 @@ class Registration extends StatefulWidget {
 
 class _RegistrationState extends State<Registration> {
   final registrationService _apiService = registrationService();
-  TextEditingController fullName = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController region = TextEditingController();
+  TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController rpassword = TextEditingController();
   bool dont_show_password = true;
@@ -28,178 +24,119 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
+      padding: const EdgeInsets.all(0),
+      isvisible: true,
+      backgroundImage: false,
+      backgroundAuth: true,
       child: Form(
           key: _formKey,
           child: Column(
             children: [
               SizedBox(
-                height: 20,
-              ),
-              AppText(
-                size: 20,
-                txt: 'TABIRI',
-                color: Colors.black,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Image.asset('assets/logo.png'),
-              SizedBox(
-                height: 20,
+                height: 90,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 250),
-                child: AppText(
-                  txt: 'SIGN UP',
-                  size: 20,
-                  color: Colors.white,
-                ),
+                padding: const EdgeInsets.only(
+                    left: 16, right: 16, bottom: 16, top: 16),
+                child: Image.asset('assets/logo1.png'),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: AppCard(
-                    color: Colors.grey.shade200,
-                    border: 20,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 30,
-                        ),
-                        AppContainer(
-                            width: 340,
-                            bottom: 24,
-                            child: AppInputText(
-                              textfieldcontroller: fullName,
-                              icon: Icon(
-                                Icons.mail,
-                                color: Colors.black,
-                              ),
-                              label: 'Full Name',
-                              obscure: false,
-                              isemail: false,
-                              fillcolor: HexColor('e7d4d3'),
-                            )),
-                        AppContainer(
-                            width: 340,
-                            bottom: 24,
-                            child: AppInputText(
-                              textfieldcontroller: email,
-                              icon: Icon(
-                                Icons.mail,
-                                color: Colors.black,
-                              ),
-                              label: 'Email',
-                              obscure: false,
-                              isemail: true,
-                              fillcolor: HexColor('e7d4d3'),
-                            )),
-                        AppContainer(
-                            width: 340,
-                            bottom: 24,
-                            child: AppInputText(
-                              textfieldcontroller: password,
-                              icon: Icon(
-                                Icons.lock,
-                                color: Colors.black,
-                              ),
-                              label: 'Password',
-                              obscure: dont_show_password,
-                              suffixicon: IconButton(
-                                  onPressed: (() {
-                                    setState(() {
-                                      dont_show_password = !dont_show_password;
-                                    });
-                                  }),
-                                  icon: Icon(Icons.remove_red_eye)),
-                              isemail: false,
-                              fillcolor: HexColor('e7d4d3'),
-                            )),
-                        AppContainer(
-                            width: 340,
-                            bottom: 24,
-                            child: AppInputText(
-                              onChange: (p0) {
-                                if (p0 != password.text) {
-                                  return "Passwords do not match";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              textfieldcontroller: rpassword,
-                              icon: Icon(
-                                Icons.lock,
-                                color: Colors.black,
-                              ),
-                              label: 'Re-enter Password',
-                              obscure: dont_show_password,
-                              suffixicon: IconButton(
-                                  onPressed: (() {
-                                    setState(() {
-                                      dont_show_password = !dont_show_password;
-                                    });
-                                  }),
-                                  icon: Icon(Icons.remove_red_eye)),
-                              isemail: false,
-                              fillcolor: HexColor('e7d4d3'),
-                            )),
-                        AppContainer(
-                            width: 340,
-                            bottom: 0,
-                            child: AppInputText(
-                              textfieldcontroller: region,
-                              icon: Icon(
-                                Icons.mail,
-                                color: Colors.black,
-                              ),
-                              label: 'Region of Residence',
-                              obscure: false,
-                              isemail: false,
-                              fillcolor: HexColor('e7d4d3'),
-                            )),
-                        AppContainer(
-                          width: 140,
-                          bottom: 24,
-                          child: AppButton(
-                            label: 'SIGN UP',
-                            onPress: () async{
-                              try {
-                                final response = await _apiService.registration(
-                                    context,
-                                    email.text.toString(),
-                                    password.text.toString(),
-                                    fullName.text.toString(),
-                                    region.text.toString()
-                                    );
-                                // handle successful login response
-                              } catch (e) {
-                                // handle login error
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(e.toString()),
-                                    duration: Duration(seconds: 3),
-                                  ),
-                                );
-                              }
-                            },
-                            bcolor: HexColor('#e7d4d3'),
-                            borderRadius: 20,
-                            textColor: Colors.black,
-                          ),
-                        )
-                      ],
-                    )),
+              SizedBox(
+                height: 130,
               ),
-              GestureDetector(
-                onTap: () => Navigator.pushNamed(context, RouteNames.login),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(color: AppConst.black),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 120),
-                  child: AppText(
-                    size: 15,
-                    txt: 'Already have an account? Login',
-                    color: Colors.white,
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Column(
+                    children: [
+                      AppInputText(
+                        textfieldcontroller: username,
+                        isemail: false,
+                        fillcolor: AppConst.primary,
+                        label: 'Username',
+                        obscure: false,
+                        icon: Icon(
+                          Icons.person,
+                          color: AppConst.white,
+                        ),
+                      ),
+                      AppInputText(
+                        textfieldcontroller: password,
+                        isemail: false,
+                        fillcolor: AppConst.primary,
+                        label: 'Password',
+                        obscure: false,
+                        icon: Icon(
+                          Icons.lock,
+                          color: AppConst.white,
+                        ),
+                      ),
+                      AppInputText(
+                        textfieldcontroller: rpassword,
+                        isemail: false,
+                        fillcolor: AppConst.primary,
+                        label: 'Password',
+                        obscure: false,
+                        icon: Icon(
+                          Icons.lock,
+                          color: AppConst.white,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 8, right: 12, top: 8, bottom: 8),
+                        child: Align(
+                            alignment: Alignment.centerRight,
+                            child: AppText(
+                              txt: 'Forgot Password?',
+                              size: 15,
+                              color: AppConst.white,
+                            )),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        width: 350,
+                        height: 55,
+                        child: AppButton(
+                            onPress: () => null,
+                            label: 'SIGN UP',
+                            borderRadius: 20,
+                            textColor: AppConst.white,
+                            bcolor: AppConst.primary,
+                            size: 15),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 12, right: 8, top: 8, bottom: 8),
+                        child: GestureDetector(
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteNames.registration),
+                          child: Row(
+                            children: [
+                              AppText(
+                                txt: 'Already have an account?',
+                                size: 15,
+                                color: AppConst.white,
+                                weight: FontWeight.w400,
+                              ),
+                              AppText(
+                                txt: 'Sign In',
+                                size: 15,
+                                color: AppConst.white,
+                                weight: FontWeight.bold,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ),
+              )
             ],
           )),
     );
