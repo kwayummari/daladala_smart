@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
   final loginService _apiService = loginService();
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
+  bool marked = false;
   bool dont_show_password = true;
   final _formKey = GlobalKey<FormState>();
   @override
@@ -78,50 +79,88 @@ class _LoginState extends State<Login> {
                   color: AppConst.white,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 8, right: 12, top: 8, bottom: 8),
-                child: Align(
-                    alignment: Alignment.centerRight,
-                    child: AppText(
-                      txt: 'Forgot Password?',
-                      size: 15,
-                      color: AppConst.white,
-                    )),
+              Row(
+                children: [
+                  Spacer(),
+                  Checkbox(
+                    fillColor: MaterialStateProperty.resolveWith<Color?>(
+                      (Set<MaterialState> states) => AppConst.primary,
+                    ),
+                    activeColor: AppConst.primary,
+                    value: marked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        marked = !marked;
+                      });
+                    },
+                  ),
+                  AppText(
+                    txt: 'Remember me',
+                    size: 15,
+                    color: AppConst.white,
+                  ),
+                  Spacer()
+                ],
               ),
               SizedBox(
-                height: 100,
+                height: 20,
               ),
               Container(
                 width: 350,
                 height: 55,
                 child: AppButton(
-                    onPress: () => null,
-                    label: 'LOGIN',
-                    borderRadius: 20,
-                    textColor: AppConst.white,
-                    bcolor: AppConst.primary,
-                    size: 15),
+                  onPress: () => loginService()
+                      .login(context, username.text, password.text),
+                  label: 'LOGIN',
+                  borderRadius: 20,
+                  textColor: AppConst.white,
+                  bcolor: AppConst.primary,
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 12, right: 8, top: 8, bottom: 8),
-                child: GestureDetector(
-                  onTap: () =>
-                      Navigator.pushNamed(context, RouteNames.registration),
-                  child: Row(
+              SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () => null,
+                child: Container(
+                  width: 60,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 2.0,
+                    ),
+                  ),
+                  child: Image.asset(
+                    'assets/google.png',
+                    height: 40,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () =>
+                    Navigator.pushNamed(context, RouteNames.registration),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),
                     children: [
-                      AppText(
-                        txt: 'Don\'t have an account?',
-                        size: 15,
-                        color: AppConst.white,
-                        weight: FontWeight.w400,
+                      TextSpan(
+                        text: 'Don\'t have an account? ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: AppConst.white),
                       ),
-                      AppText(
-                        txt: 'Sign Up',
-                        size: 15,
-                        color: AppConst.white,
-                        weight: FontWeight.bold,
+                      TextSpan(
+                        text: 'Sign up',
+                        style: TextStyle(
+                          color: AppConst.primary,
+                        ),
                       ),
                     ],
                   ),

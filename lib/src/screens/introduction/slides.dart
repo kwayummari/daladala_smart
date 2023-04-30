@@ -3,7 +3,6 @@ import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class Slide extends StatelessWidget {
   final String title;
@@ -98,13 +97,11 @@ class Slide extends StatelessWidget {
             left: 80,
             right: 80,
             child: AppButton(
-              weight: FontWeight.bold,
               onPress: () => SlideFunction().login(context),
               label: "Travel Now",
               borderRadius: 25,
               textColor: AppConst.white,
               bcolor: AppConst.primary,
-              size: 20,
             ))
       ],
     );

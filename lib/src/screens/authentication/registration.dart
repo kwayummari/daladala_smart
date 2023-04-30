@@ -17,6 +17,7 @@ class Registration extends StatefulWidget {
 class _RegistrationState extends State<Registration> {
   final registrationService _apiService = registrationService();
   TextEditingController username = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController rpassword = TextEditingController();
   bool dont_show_password = true;
@@ -33,15 +34,29 @@ class _RegistrationState extends State<Registration> {
           child: Column(
             children: [
               SizedBox(
-                height: 90,
+                height: 80,
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 16, right: 16, bottom: 16, top: 16),
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
                 child: Image.asset('assets/logo1.png'),
               ),
               SizedBox(
-                height: 130,
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    txt: 'Create your \n Account',
+                    size: 30,
+                    weight: FontWeight.w900,
+                    color: AppConst.white,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 12,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -62,6 +77,12 @@ class _RegistrationState extends State<Registration> {
                           color: AppConst.white,
                         ),
                       ),
+                      AppInputText(
+                          textfieldcontroller: email,
+                          isemail: true,
+                          fillcolor: AppConst.primary,
+                          label: 'Email',
+                          obscure: false),
                       AppInputText(
                         textfieldcontroller: password,
                         isemail: false,
@@ -84,17 +105,6 @@ class _RegistrationState extends State<Registration> {
                           color: AppConst.white,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 8, right: 12, top: 8, bottom: 8),
-                        child: Align(
-                            alignment: Alignment.centerRight,
-                            child: AppText(
-                              txt: 'Forgot Password?',
-                              size: 15,
-                              color: AppConst.white,
-                            )),
-                      ),
                       SizedBox(
                         height: 30,
                       ),
@@ -102,12 +112,17 @@ class _RegistrationState extends State<Registration> {
                         width: 350,
                         height: 55,
                         child: AppButton(
-                            onPress: () => null,
-                            label: 'SIGN UP',
-                            borderRadius: 20,
-                            textColor: AppConst.white,
-                            bcolor: AppConst.primary,
-                            size: 15),
+                          onPress: () => registrationService().registration(
+                              context,
+                              email.text,
+                              password.text,
+                              rpassword.text,
+                              username.text),
+                          label: 'SIGN UP',
+                          borderRadius: 20,
+                          textColor: AppConst.white,
+                          bcolor: AppConst.primary,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
@@ -126,7 +141,7 @@ class _RegistrationState extends State<Registration> {
                               AppText(
                                 txt: 'Sign In',
                                 size: 15,
-                                color: AppConst.white,
+                                color: AppConst.primary,
                                 weight: FontWeight.bold,
                               ),
                             ],

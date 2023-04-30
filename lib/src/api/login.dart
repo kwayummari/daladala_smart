@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:daladala_smart/src/widgets/app_snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:dio/dio.dart';
 
@@ -43,17 +45,21 @@ class Api {
   }
 
   // POST Request
-  Future<dynamic> post(String endPoint, Map<String, dynamic> data) async {
+  Future<dynamic> post(BuildContext context,String endPoint, Map<String, dynamic> data) async {
     // if (!(await hasInternetConnection())) {
     //   throw Exception("No internet connection");
     // }
-    // try {
+    try {
     Response response = await _dio.post("$baseUrl/$endPoint", data: data);
     _handleError(response);
     return json.decode(response.toString());
-    // } catch (e) {
-    //   throw Exception("Failed to post data");
-    // }
+    } catch (e) {
+      AppSnackbar(
+                                  isError: true,
+                                  response: e.toString(),
+                                ).show(context);
+      throw Exception("Failed to post data");
+    }
   }
 
   // PUT Request

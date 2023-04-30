@@ -1,24 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
+import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
   final Function onPress;
   final String label;
   final Color bcolor;
   final double borderRadius;
-  var weight;
   final Color textColor;
-  double size;
+  final Color? borderColor;
 
-   AppButton(
+  const AppButton(
       {Key? key,
       required this.onPress,
       required this.label,
       required this.borderRadius,
       required this.textColor,
-      this.weight,
       required this.bcolor,
-      required this.size
+      this.borderColor,
       })
       : super(key: key);
 
@@ -30,10 +29,20 @@ class AppButton extends StatelessWidget {
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius),
+              side: borderColor != null
+                  ? BorderSide(
+                      color: borderColor ?? AppConst.transparent,
+                      width: 1,
+                    )
+                  : BorderSide(color: AppConst.transparent, width: 1),
             ),
           ),
         ),
         onPressed: () => onPress(),
-        child: AppText(txt: label, color: textColor, size: size, weight: weight,));
+        child: AppText(
+          txt: label,
+          color: textColor,
+          size: 15,
+        ));
   }
 }

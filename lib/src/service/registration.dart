@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/widgets/app_snackbar.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:daladala_smart/routes/route-names.dart';
@@ -12,17 +14,39 @@ class registrationService {
   Api api = Api();
 
   Future<void> registration(BuildContext context, String email, String password,
-      String region, String fullname) async {
-    Map<String, dynamic> data = {
-      'email': email,
-      'fullname': fullname,
-      'region': region,
-      'password': password,
-    };
-    final response = await api.post('registration.php', data);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('email', email);
-    // await prefs.setString('role', response['role']);
-    Navigator.pushNamedAndRemoveUntil(context, RouteNames.home, (_) => false);
+      String rpassword, String fullname) async {
+    if (password.toString() == rpassword.toString()) {
+      Map<String, dynamic> data = {
+        'email': email,
+        'fullname': fullname,
+        'password': password,
+      };
+      final response = await api.post(context, 'auth/registration.php', data);
+      if (response.toString() == 'success') {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('email', email);
+        await prefs.setString('role', response['role']);
+        Fluttertoast.showToast(
+          msg: response,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: AppConst.primary,
+          textColor: Colors.white,
+          fontSize: 15.0,
+        );
+        Navigator.pushNamed(context, RouteNames.login);
+      } else {
+        AppSnackbar(
+          isError: true,
+          response: response.toString(),
+        ).show(context);
+      }
+    } else {
+      AppSnackbar(
+        isError: true,
+        response: 'Something went wrong!',
+      ).show(context);
+    }
   }
 }
