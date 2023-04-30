@@ -17,9 +17,9 @@ class registrationService {
       String rpassword, String fullname) async {
     if (password.toString() == rpassword.toString()) {
       Map<String, dynamic> data = {
-        'email': email,
-        'fullname': fullname,
-        'password': password,
+        'email': email.toString(),
+        'fullname': fullname.toString(),
+        'password': password.toString(),
       };
       final response = await api.post(context, 'auth/registration.php', data);
       if (response.toString() == 'success') {
