@@ -16,7 +16,7 @@ class Registration extends StatefulWidget {
 
 class _RegistrationState extends State<Registration> {
   final registrationService _apiService = registrationService();
-  TextEditingController username = TextEditingController();
+  TextEditingController fullname = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController rpassword = TextEditingController();
@@ -67,10 +67,10 @@ class _RegistrationState extends State<Registration> {
                   child: Column(
                     children: [
                       AppInputText(
-                        textfieldcontroller: username,
+                        textfieldcontroller: fullname,
                         isemail: false,
                         fillcolor: AppConst.primary,
-                        label: 'Username',
+                        label: 'Fullname',
                         obscure: false,
                         icon: Icon(
                           Icons.person,
@@ -117,7 +117,7 @@ class _RegistrationState extends State<Registration> {
                               email.text,
                               password.text,
                               rpassword.text,
-                              username.text),
+                              fullname.text),
                           label: 'SIGN UP',
                           borderRadius: 20,
                           textColor: AppConst.white,

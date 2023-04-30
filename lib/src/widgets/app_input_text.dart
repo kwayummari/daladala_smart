@@ -31,6 +31,7 @@ class AppInputText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
       child: TextFormField(
+        style: TextStyle(color: AppConst.white),
         onChanged: onChange,
         obscureText: obscure,
         obscuringCharacter: '*',
@@ -39,10 +40,13 @@ class AppInputText extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          label: AppText(
-            txt: label,
-            size: 15,
-            color: AppConst.white,
+          label: Container(
+            color: AppConst.primary,
+            child: AppText(
+              txt: label,
+              size: 15,
+              color: AppConst.white,
+            ),
           ),
           filled: true,
           fillColor: fillcolor,
