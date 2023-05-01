@@ -25,10 +25,10 @@ class Api {
   }
 
   // GET Request
-  Future<dynamic> get(String endPoint) async {
-    if (!(await hasInternetConnection())) {
-      throw Exception("No internet connection");
-    }
+  Future<dynamic> get(BuildContext context, String endPoint) async {
+    // if (!(await hasInternetConnection())) {
+    //   throw Exception("No internet connection");
+    // }
     try {
       final response = await http
           .get(Uri.parse("$baseUrl/$endPoint"))
@@ -36,6 +36,10 @@ class Api {
       _handleError(response);
       return json.decode(response.body);
     } catch (e) {
+      AppSnackbar(
+        isError: true,
+        response: e.toString(),
+      ).show(context);
       throw Exception("Failed to fetch data");
     }
   }
