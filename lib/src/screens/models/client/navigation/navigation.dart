@@ -80,13 +80,13 @@ class _navigationState extends State<navigation> {
               height: 20,
             ),
             Container(
-              width: 350,
+              width: 330,
               height: 50,
               child: AppButton(
                   onPress: () =>
                       Navigator.pushNamed(context, RouteNames.pricing),
                   label: 'Submit',
-                  borderRadius: 30,
+                  borderRadius: 20,
                   textColor: AppConst.white,
                   bcolor: AppConst.primary),
             )
