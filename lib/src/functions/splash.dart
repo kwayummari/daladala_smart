@@ -18,8 +18,7 @@ class SplashFunction {
     } else {
       if (email == null && role == null) {
         Navigator.pushNamed(context, RouteNames.login);
-      } else if (email != null &&
-          role == '0') {
+      } else if (email.toString() != null && role.toString() == '0') {
         Navigator.pushNamed(context, RouteNames.bottomNavigationBar);
       } else {
         Navigator.pushNamed(context, RouteNames.login);
@@ -34,7 +33,6 @@ class SplashFunction {
     var i = sharedPreferences.getString('id');
     var r = sharedPreferences.getString('role');
     var intr = sharedPreferences.getString('intro');
-
     email = email;
     id = i;
     role = r;

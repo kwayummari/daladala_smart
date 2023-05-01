@@ -1,3 +1,4 @@
+import 'package:daladala_smart/routes/route-names.dart';
 import 'package:daladala_smart/src/service/map-serivces.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app-map.dart';
@@ -32,7 +33,7 @@ class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
-      isvisible: true,
+      isvisible: false,
       backgroundImage: false,
       backgroundAuth: false,
       padding: EdgeInsets.all(0),
@@ -53,7 +54,7 @@ class _dashboardState extends State<dashboard> {
                         LatLng(position!.latitude, position!.longitude),
                     markers: Set<Marker>.of([
                       Marker(
-                        markerId: MarkerId("Userlocation"),
+                        markerId: MarkerId("Your Location"),
                         position:
                             LatLng(position!.latitude, position!.longitude),
                         icon: BitmapDescriptor.defaultMarker,
@@ -62,7 +63,7 @@ class _dashboardState extends State<dashboard> {
                           onTap: () => null,
                         ),
                       ),
-                    ]), mapId: '82cd04a44b2dbc35',
+                    ]),
                   ),
                 );
               }
@@ -84,20 +85,20 @@ class _dashboardState extends State<dashboard> {
                     padding:
                         const EdgeInsets.only(left: 30, right: 30, top: 30),
                     child: GestureDetector(
-                      onTap: () => null,
-                          // Navigator.pushNamed(context, RouteNames.navigation),
+                      onTap: () => 
+                      Navigator.pushNamed(context, RouteNames.navigation),
                       child: AppInputText(
                           enabled: false,
                           suffixicon: IconButton(
                               onPressed: () => null,
                               icon: Icon(
                                 Icons.search,
-                                color: AppConst.grey,
+                                color: AppConst.white,
                               )),
                           // circle: 50,
                           textfieldcontroller: search,
                           isemail: false,
-                          fillcolor: AppConst.brown,
+                          fillcolor: AppConst.primary,
                           label: 'Where to?',
                           ispassword: false,
                           obscure: false),

@@ -12,9 +12,9 @@ class _ridesState extends State<rides> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
-      isvisible: true,
-      backgroundImage: false,
-      backgroundAuth: false,
-      child: Container());
+        isvisible: false,
+        backgroundImage: false,
+        backgroundAuth: false,
+        child: Container());
   }
 }

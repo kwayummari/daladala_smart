@@ -12,7 +12,7 @@ class _profileState extends State<profile> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
-      isvisible: true,
+      isvisible: false,
       backgroundImage: false,
       backgroundAuth: false,
       child: Container());

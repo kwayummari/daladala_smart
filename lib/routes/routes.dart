@@ -1,6 +1,8 @@
 import 'package:daladala_smart/src/screens/introduction/intro.dart';
 import 'package:daladala_smart/src/screens/models/client/bottomNavigationBar/bottomNavigationBar.dart';
 import 'package:daladala_smart/src/screens/models/client/dashboard/dashboard.dart';
+import 'package:daladala_smart/src/screens/models/client/navigation/navigation.dart';
+import 'package:daladala_smart/src/screens/models/client/pricing/pricing.dart';
 import 'package:daladala_smart/src/screens/models/client/profile/profile.dart';
 import 'package:daladala_smart/src/screens/models/client/rides/rides.dart';
 import 'package:flutter/material.dart';
@@ -19,4 +21,6 @@ final Map<String, WidgetBuilder> routes = {
   RouteNames.rides:(context) => rides(),
   RouteNames.profile:(context) => profile(),
   RouteNames.bottomNavigationBar:(context) => bottomNavigation(),
+  RouteNames.navigation:(context) => navigation(),
+  RouteNames.pricing:(context) => pricing(),
 };

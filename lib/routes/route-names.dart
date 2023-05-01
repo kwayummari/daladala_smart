@@ -8,4 +8,6 @@ class RouteNames {
   static const String rides = '/rides';
   static const String profile = '/profile';
   static const String bottomNavigationBar = '/bottomNavigationBar';
+  static const String navigation = '/navigation';
+  static const String pricing = '/pricing';
 }
