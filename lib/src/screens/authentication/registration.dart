@@ -1,7 +1,7 @@
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
 import 'package:daladala_smart/routes/route-names.dart';
-import 'package:daladala_smart/src/service/registration.dart';
+import 'package:daladala_smart/src/service/registration-services.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_input_text.dart';
