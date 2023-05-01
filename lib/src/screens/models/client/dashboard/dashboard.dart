@@ -1,3 +1,6 @@
+import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/widgets/app_base_screen.dart';
+import 'package:daladala_smart/src/widgets/app_input_text.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -76,8 +79,8 @@ class _dashboardState extends State<dashboard> {
                     padding:
                         const EdgeInsets.only(left: 30, right: 30, top: 30),
                     child: GestureDetector(
-                      onTap: () =>
-                          Navigator.pushNamed(context, RouteNames.navigation),
+                      onTap: () => null,
+                          // Navigator.pushNamed(context, RouteNames.navigation),
                       child: AppInputText(
                           enabled: false,
                           suffixicon: IconButton(
@@ -86,11 +89,12 @@ class _dashboardState extends State<dashboard> {
                                 Icons.search,
                                 color: AppConst.grey,
                               )),
-                          circle: 50,
+                          // circle: 50,
                           textfieldcontroller: search,
                           isemail: false,
                           fillcolor: AppConst.brown,
-                          hint: 'Where to?',
+                          label: 'Where to?',
+                          ispassword: false,
                           obscure: false),
                     ),
                   )
