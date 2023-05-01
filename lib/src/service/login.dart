@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:daladala_smart/src/widgets/app_snackbar.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,15 @@ class loginService {
       'email': email,
       'password': password,
     };
-      final response = await api.post(context,'login', data);
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('email', email);
-      await prefs.setString('role', response['role']);
-      Navigator.pushNamedAndRemoveUntil(
-          context, RouteNames.home, (_) => false);
+      final response = await api.post(context,'auth/login.php', data);
+      AppSnackbar(
+          isError: true,
+          response: response.toString(),
+        ).show(context);
+      // final prefs = await SharedPreferences.getInstance();
+      // await prefs.setString('email', email);
+      // await prefs.setString('role', response['role']);
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, RouteNames.home, (_) => false);
   }
 }
