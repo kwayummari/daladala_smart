@@ -1,5 +1,6 @@
 import 'package:daladala_smart/routes/route-names.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/widgets/app-dropdown.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_input_text.dart';
@@ -79,6 +80,8 @@ class _navigationState extends State<navigation> {
             SizedBox(
               height: 20,
             ),
+            DropdownTextFormField(apiUrl: 'destination/get.php', displayField: 'name', labelText: 'Destination', valueField: 'id',),
+            SizedBox(height: 20,),
             Container(
               width: 330,
               height: 50,

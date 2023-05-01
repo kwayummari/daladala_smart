@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'package:daladala_smart/src/service/dropdown-service.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class DropdownTextFormField extends StatefulWidget {
   final String labelText;
