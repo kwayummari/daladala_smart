@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'package:daladala_smart/src/service/dropdown-service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class DropdownTextFormField extends StatelessWidget {
+class DropdownTextFormField extends StatefulWidget {
   final String labelText;
   final String apiUrl;
   final String valueField;
@@ -17,14 +18,16 @@ class DropdownTextFormField extends StatelessWidget {
     this.onChanged,
   });
 
+  @override
+  State<DropdownTextFormField> createState() => _DropdownTextFormFieldState();
+}
+
+class _DropdownTextFormFieldState extends State<DropdownTextFormField> {
+
   Future<List<Map<String, dynamic>>> _getItems() async {
-    final response = await http.get(Uri.parse(apiUrl));
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body) as List<dynamic>;
+    final dropdownService _dropdownService = await dropdownService();
+    final data = await _dropdownService.dropdown(context, widget.apiUrl) as List<dynamic>;
       return data.map((item) => item as Map<String, dynamic>).toList();
-    } else {
-      throw Exception('Failed to fetch items');
-    }
   }
 
   @override
@@ -35,16 +38,16 @@ class DropdownTextFormField extends StatelessWidget {
         if (snapshot.hasData) {
           return DropdownButtonFormField<String>(
             decoration: InputDecoration(
-              labelText: labelText,
+              labelText: widget.labelText,
               border: OutlineInputBorder(),
             ),
             items: snapshot.data!
                 .map((item) => DropdownMenuItem<String>(
-                      value: item[valueField].toString(),
-                      child: Text(item[displayField]),
+                      value: item[widget.valueField].toString(),
+                      child: Text(item[widget.displayField]),
                     ))
                 .toList(),
-            onChanged: onChanged,
+            onChanged: widget.onChanged,
           );
         } else if (snapshot.hasError) {
           return Text('Failed to fetch items');
