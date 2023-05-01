@@ -10,7 +10,7 @@ class AppSnackbar extends SnackBar {
     required this.response,
     required this.isError,
   }) : super(
-          backgroundColor: isError == false ? Colors.green : Colors.black,
+          backgroundColor: isError == false ? Colors.green : Colors.red,
           content: Center(
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),

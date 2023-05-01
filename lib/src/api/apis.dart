@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:daladala_smart/src/widgets/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
@@ -14,7 +13,7 @@ class Api {
       final response = await http.head(Uri.parse(baseUrl));
       return response.statusCode == 200;
     } catch (e) {
-     throw Exception("Check your internet connection");
+      throw Exception("Check your internet connection");
     }
   }
 
@@ -42,28 +41,28 @@ class Api {
   }
 
   // POST Request
-  Future<dynamic> post(BuildContext context,String endPoint, Map<String, dynamic> data) async {
-     Future<dynamic> post(String endPoint, Map<String, dynamic> data) async {
-    if (!(await hasInternetConnection())) {
-      throw Exception("No internet connection");
-    }
+  Future<dynamic> post(
+      BuildContext context, String endPoint, Map<String, dynamic> data) async {
+    // if (!(await hasInternetConnection())) {
+    //   throw Exception("No internet connection");
+    // } else {
     try {
       final response = await http
           .post(
             Uri.parse('$baseUrl/$endPoint'),
             body: data,
           )
-          .timeout(Duration(seconds: 5));
+          .timeout(Duration(seconds: 10));
       _handleError(response);
       return json.decode(response.body);
     } catch (e) {
       AppSnackbar(
-                                  isError: true,
-                                  response: e.toString(),
-                                ).show(context);
+        isError: true,
+        response: e.toString(),
+      ).show(context);
       throw Exception(e.toString());
     }
-  }
+    // }
   }
 
   // PUT Request

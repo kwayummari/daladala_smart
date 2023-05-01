@@ -21,6 +21,8 @@ class _RegistrationState extends State<Registration> {
   TextEditingController password = TextEditingController();
   TextEditingController rpassword = TextEditingController();
   bool dont_show_password = true;
+  bool obscure = true;
+  bool obscure1 = true;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -67,8 +69,9 @@ class _RegistrationState extends State<Registration> {
                   child: Column(
                     children: [
                       AppInputText(
-                        textfieldcontroller: fullname,
                         isemail: false,
+                        textfieldcontroller: fullname,
+                        ispassword: false,
                         fillcolor: AppConst.primary,
                         label: 'Fullname',
                         obscure: false,
@@ -78,28 +81,49 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       AppInputText(
-                          textfieldcontroller: email,
                           isemail: true,
+                          textfieldcontroller: email,
+                          ispassword: false,
                           fillcolor: AppConst.primary,
                           label: 'Email',
                           obscure: false),
                       AppInputText(
-                        textfieldcontroller: password,
                         isemail: false,
+                        suffixicon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                obscure = !obscure;
+                              });
+                            },
+                            icon: obscure == true
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility)),
+                        textfieldcontroller: password,
+                        ispassword: true,
                         fillcolor: AppConst.primary,
                         label: 'Password',
-                        obscure: false,
+                        obscure: obscure,
                         icon: Icon(
                           Icons.lock,
                           color: AppConst.white,
                         ),
                       ),
                       AppInputText(
-                        textfieldcontroller: rpassword,
                         isemail: false,
+                        suffixicon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                obscure1 = !obscure1;
+                              });
+                            },
+                            icon: obscure1 == true
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility)),
+                        textfieldcontroller: rpassword,
+                        ispassword: false,
                         fillcolor: AppConst.primary,
                         label: 'Password',
-                        obscure: false,
+                        obscure: obscure1,
                         icon: Icon(
                           Icons.lock,
                           color: AppConst.white,
@@ -112,12 +136,17 @@ class _RegistrationState extends State<Registration> {
                         width: 350,
                         height: 55,
                         child: AppButton(
-                          onPress: () => registrationService().registration(
-                              context,
-                              email.text,
-                              password.text,
-                              rpassword.text,
-                              fullname.text),
+                          onPress: () {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
+                            registrationService().registration(
+                                context,
+                                email.text,
+                                password.text,
+                                rpassword.text,
+                                fullname.text);
+                          },
                           label: 'SIGN UP',
                           borderRadius: 20,
                           textColor: AppConst.white,

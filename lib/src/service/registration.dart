@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:daladala_smart/src/api/apis.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_snackbar.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -6,8 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:daladala_smart/routes/route-names.dart';
-
-import '../api/login.dart';
 
 class registrationService {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
@@ -25,7 +24,7 @@ class registrationService {
       if (response.toString() == 'success') {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('email', email);
-        await prefs.setString('role', response['role']);
+        await prefs.setString('role', '0');
         Fluttertoast.showToast(
           msg: response,
           toastLength: Toast.LENGTH_SHORT,

@@ -1,6 +1,5 @@
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 
 class AppInputText extends StatelessWidget {
@@ -12,10 +11,12 @@ class AppInputText extends StatelessWidget {
   final bool obscure;
   final Function? validate;
   final Function(String)? onChange;
+  final bool ispassword;
   final bool isemail;
   AppInputText({
     Key? key,
     required this.textfieldcontroller,
+    required this.ispassword,
     required this.isemail,
     required this.fillcolor,
     this.icon,
@@ -62,15 +63,24 @@ class AppInputText extends StatelessWidget {
           suffixIcon: suffixicon,
         ),
         validator: (value) {
+          RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
           RegExp regex = RegExp(
               r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~.]).{8,}$');
-          if (isemail) {
+          if (ispassword == true && isemail == false) {
             if (value!.isNotEmpty) {
-              return null;
+              if (!regex.hasMatch(value)) {
+                return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
+              }
             } else if (value.isEmpty) {
               return "THis field cannot be empty";
-            } else if (!regex.hasMatch(value)) {
-              return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
+            } else {
+              return null;
+            }
+          } else if (isemail == true && isemail == true) {
+            if (value!.isEmpty || !emailRegex.hasMatch(value)) {
+              return 'Please enter a valid email address';
+            } else {
+              return null;
             }
           } else {
             if (value!.isNotEmpty) {
