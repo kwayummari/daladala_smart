@@ -22,14 +22,18 @@ class loginService {
     String id = splitResponse[0]; // "1"
     String role = splitResponse[1]; // "0"
 
-    AppSnackbar(
-      isError: true,
-      response: role.toString(),
-    ).show(context);
-    final prefs = await SharedPreferences.getInstance();
+    if(response != 'wrong') {
+      if(role == '0') {
+        final prefs = await SharedPreferences.getInstance();
     await prefs.setString('email', email);
     await prefs.setString('id', id.toString());
     await prefs.setString('role', role.toString());
-    Navigator.pushNamedAndRemoveUntil(context, RouteNames.home, (_) => false);
+    Navigator.pushNamedAndRemoveUntil(context, RouteNames.dashboard, (_) => false);
+      }
+    } else {
+      AppSnackbar(
+      isError: true,
+      response: 'Wrong username or password',
+    ).show(context);}
   }
 }

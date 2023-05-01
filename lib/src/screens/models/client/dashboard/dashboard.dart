@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/service/map-serivces.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app-map.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
@@ -31,6 +32,9 @@ class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
+      isvisible: true,
+      backgroundImage: false,
+      backgroundAuth: false,
       padding: EdgeInsets.all(0),
       child: Stack(
         children: [
@@ -58,7 +62,7 @@ class _dashboardState extends State<dashboard> {
                           onTap: () => null,
                         ),
                       ),
-                    ]),
+                    ]), mapId: '82cd04a44b2dbc35',
                   ),
                 );
               }

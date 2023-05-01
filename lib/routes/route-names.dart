@@ -4,4 +4,5 @@ class RouteNames {
   static const String registration = '/registration';
   static const String splash = '/splash';
   static const String intro = '/intro';
+  static const String dashboard = '/dashboard';
 }
