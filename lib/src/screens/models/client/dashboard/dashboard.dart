@@ -1,4 +1,5 @@
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/widgets/app-map.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_input_text.dart';
 import 'package:flutter/material.dart';
