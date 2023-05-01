@@ -3,6 +3,7 @@ import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_input_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:daladala_smart/src/service/login-services.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
@@ -21,6 +22,7 @@ class _LoginState extends State<Login> {
   TextEditingController password = TextEditingController();
   bool marked = false;
   bool dont_show_password = true;
+  bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,8 @@ class _LoginState extends State<Login> {
                 icon: Icon(
                   Icons.person,
                   color: AppConst.white,
-                ), isemail: true,
+                ),
+                isemail: true,
               ),
               AppInputText(
                 isemail: false,
@@ -106,18 +109,22 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                width: 350,
-                height: 55,
-                child: AppButton(
-                  onPress: () => loginService()
-                      .login(context, email.text, password.text),
-                  label: 'LOGIN',
-                  borderRadius: 20,
-                  textColor: AppConst.white,
-                  bcolor: AppConst.primary,
-                ),
-              ),
+              isLoading == true
+                  ? SpinKitCircle(
+                      color: AppConst.primary,
+                    )
+                  : Container(
+                      width: 350,
+                      height: 55,
+                      child: AppButton(
+                        onPress: () => loginService()
+                            .login(context, email.text, password.text),
+                        label: 'LOGIN',
+                        borderRadius: 20,
+                        textColor: AppConst.white,
+                        bcolor: AppConst.primary,
+                      ),
+                    ),
               SizedBox(
                 height: 10,
               ),

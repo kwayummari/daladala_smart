@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:daladala_smart/src/provider/login-provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -24,7 +25,9 @@ Future main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) =>  MaterialApp(
+  Widget build(BuildContext context) =>  ChangeNotifierProvider(
+      create: (context) => MyProvider(),
+      child: MaterialApp(
     initialRoute: RouteNames.splash,
       routes: routes,
       builder: (context, widget) => ResponsiveWrapper.builder(
@@ -48,5 +51,5 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
            colorScheme: ColorScheme.fromSwatch(
             primarySwatch: Colors.green,
-            ).copyWith(background: Colors.green.shade400)),);
+            ).copyWith(background: Colors.green.shade400)),));
 }
