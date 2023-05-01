@@ -1,4 +1,5 @@
 import 'package:daladala_smart/routes/route-names.dart';
+import 'package:daladala_smart/src/provider/login-provider.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_input_text.dart';
@@ -8,6 +9,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:daladala_smart/src/service/login-services.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -22,10 +24,10 @@ class _LoginState extends State<Login> {
   TextEditingController password = TextEditingController();
   bool marked = false;
   bool dont_show_password = true;
-  bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final myProvider = Provider.of<MyProvider>(context);
     return AppBaseScreen(
       isvisible: true,
       backgroundImage: false,
@@ -109,7 +111,7 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 20,
               ),
-              isLoading == true
+              myProvider.myLoging == true
                   ? SpinKitCircle(
                       color: AppConst.primary,
                     )

@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 
 class MyProvider extends ChangeNotifier {
-  bool _myBool = false;
+  bool _isLoging = false;
 
-  bool get myBool => _myBool;
+  bool get myLoging => _isLoging;
 
-  void updateBool(bool newValue) {
-    _myBool = newValue;
+  void updateLoging(bool newValue) {
+    _isLoging = newValue;
     notifyListeners();
   }
 }

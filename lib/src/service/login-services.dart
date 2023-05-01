@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:daladala_smart/src/provider/login-provider.dart';
 import 'package:daladala_smart/src/widgets/app_snackbar.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:daladala_smart/routes/route-names.dart';
@@ -13,6 +15,7 @@ class loginService {
 
   Future<void> login(
       BuildContext context, String email, String password) async {
+        final myProvider = Provider.of<MyProvider>(context);
     Map<String, dynamic> data = {
       'email': email.toString(),
       'password': password.toString(),
@@ -21,6 +24,7 @@ class loginService {
     // "0"
 
     if (response != 'wrong') {
+      myProvider.updateLoging(!myProvider.myLoging);
       List<String> splitResponse = response.split("-");
       String id = splitResponse[0]; // "1"
       String role = splitResponse[1];
@@ -33,6 +37,7 @@ class loginService {
             context, RouteNames.dashboard, (_) => false);
       }
     } else {
+      myProvider.updateLoging(!myProvider.myLoging);
       AppSnackbar(
         isError: true,
         response: 'Wrong username or password',
