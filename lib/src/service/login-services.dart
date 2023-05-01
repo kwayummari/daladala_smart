@@ -15,7 +15,9 @@ class loginService {
 
   Future<void> login(
       BuildContext context, String email, String password) async {
-        final myProvider = Provider.of<MyProvider>(context);
+    final myProvider = Provider.of<MyProvider>(context, listen: false);
+    Provider.of<MyProvider>(context, listen: false)
+        .updateLoging(!myProvider.myLoging);
     Map<String, dynamic> data = {
       'email': email.toString(),
       'password': password.toString(),
@@ -24,7 +26,8 @@ class loginService {
     // "0"
 
     if (response != 'wrong') {
-      myProvider.updateLoging(!myProvider.myLoging);
+      Provider.of<MyProvider>(context, listen: false)
+          .updateLoging(!myProvider.myLoging);
       List<String> splitResponse = response.split("-");
       String id = splitResponse[0]; // "1"
       String role = splitResponse[1];
@@ -34,10 +37,11 @@ class loginService {
         await prefs.setString('id', id.toString());
         await prefs.setString('role', role.toString());
         Navigator.pushNamedAndRemoveUntil(
-            context, RouteNames.dashboard, (_) => false);
+            context, RouteNames.bottomNavigationBar, (_) => false);
       }
     } else {
-      myProvider.updateLoging(!myProvider.myLoging);
+      Provider.of<MyProvider>(context, listen: false)
+          .updateLoging(!myProvider.myLoging);
       AppSnackbar(
         isError: true,
         response: 'Wrong username or password',

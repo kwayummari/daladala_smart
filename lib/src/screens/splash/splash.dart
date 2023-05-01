@@ -19,6 +19,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     SplashFunction().navigatorToHome(context);
   }
+  
 
   @override
   Widget build(BuildContext context) {

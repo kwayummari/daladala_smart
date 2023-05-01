@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashFunction {
-  var username;
-  var status;
-  var language;
+  var email;
+  var id;
+  var role;
   var intro;
 
   Future navigatorToHome(context) async {
@@ -16,18 +16,12 @@ class SplashFunction {
     if (intro == null) {
       Navigator.pushNamed(context, RouteNames.intro);
     } else {
-      if (username == null && status == null) {
+      if (email == null && role == null) {
         Navigator.pushNamed(context, RouteNames.login);
-      } else if (username != null &&
-          (status == 'client' ||
-              status == 'Community Based Mobilizers' ||
-              status == 'admin' ||
-              status == 'super-admin') &&
-          language != null) {
-        Navigator.pushNamed(context, RouteNames.login);
-      } else if (username != null &&
-          status == 'Health Care Providers' &&
-          language != null) {
+      } else if (email != null &&
+          role == '0') {
+        Navigator.pushNamed(context, RouteNames.bottomNavigationBar);
+      } else {
         Navigator.pushNamed(context, RouteNames.login);
       }
     }
@@ -36,14 +30,14 @@ class SplashFunction {
   Future<void> getValidationData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    var u = sharedPreferences.getString('username');
-    var l = sharedPreferences.getString('language');
-    var s = sharedPreferences.getString('status');
-    var i = sharedPreferences.getString('intro');
+    var e = sharedPreferences.getString('email');
+    var i = sharedPreferences.getString('id');
+    var r = sharedPreferences.getString('role');
+    var intr = sharedPreferences.getString('intro');
 
-    language = l;
-    username = u;
-    status = s;
-    intro = i;
+    email = email;
+    id = i;
+    role = r;
+    intro = intr;
   }
 }
