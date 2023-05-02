@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class profileService {
   Api api = Api();
-  Future profile(BuildContext context, String endPoint, String id) async {
+  Future profile(BuildContext context, String id) async {
     Map<String, dynamic> data = {
         'id': id.toString(),
       };
-    final response = await api.post(context, endPoint, data);
+    final response = await api.post(context, 'profile/get.php', data);
     return response;
   }
 }
