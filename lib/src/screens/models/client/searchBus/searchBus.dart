@@ -40,7 +40,15 @@ class _searchBusState extends State<searchBus> {
   _navigatortohome() async {
     await getHome().whenComplete(() async {
       await Future.delayed(Duration(seconds: 5), () {});
-      Navigator.pushNamed(context, RouteNames.buses);
+      Navigator.pushNamed(
+                            context,
+                            RouteNames.searchBus,
+                            arguments: {
+                              'destination': widget.destination.toString(),
+                              'dire': widget.dire.text.toString(),
+                              'route': widget.route.toString(),
+                            },
+                          );
     });
   }
 
@@ -93,7 +101,7 @@ class _searchBusState extends State<searchBus> {
             height: MediaQuery.of(context).size.height,
             child: Container(
               decoration: BoxDecoration(
-                color: AppConst.whiteOpacity,
+                color: AppConst.blackOpacity,
               ),
               child: Column(
                 children: [
@@ -102,12 +110,12 @@ class _searchBusState extends State<searchBus> {
                   ),
                   SpinKitCircle(
                     size: 70,
-                    color: AppConst.black,
+                    color: AppConst.primary,
                   ),
                   AppText(
                     txt: 'Searching for Provider',
                     size: 15,
-                    color: AppConst.black,
+                    color: AppConst.primary,
                   )
                 ],
               ),
