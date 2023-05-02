@@ -20,6 +20,7 @@ class _RegistrationState extends State<Registration> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController rpassword = TextEditingController();
+  TextEditingController phone = TextEditingController();
   bool dont_show_password = true;
   bool obscure = true;
   bool obscure1 = true;
@@ -77,6 +78,19 @@ class _RegistrationState extends State<Registration> {
                         obscure: false,
                         icon: Icon(
                           Icons.person,
+                          color: AppConst.white,
+                        ),
+                      ),
+                      AppInputText(
+                        isemail: false,
+                        isPhone: true,
+                        textfieldcontroller: phone,
+                        ispassword: false,
+                        fillcolor: AppConst.primary,
+                        label: 'Phone number',
+                        obscure: false,
+                        icon: Icon(
+                          Icons.phone,
                           color: AppConst.white,
                         ),
                       ),
@@ -145,7 +159,7 @@ class _RegistrationState extends State<Registration> {
                                 email.text,
                                 password.text,
                                 rpassword.text,
-                                fullname.text);
+                                fullname.text,phone.text);
                           },
                           label: 'SIGN UP',
                           borderRadius: 20,

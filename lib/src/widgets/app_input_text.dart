@@ -14,8 +14,10 @@ class AppInputText extends StatelessWidget {
   final bool ispassword;
   final bool isemail;
   final bool? enabled;
+  final bool? isPhone;
   AppInputText({
     Key? key,
+    this.isPhone,
     required this.textfieldcontroller,
     required this.ispassword,
     required this.isemail,
@@ -66,10 +68,12 @@ class AppInputText extends StatelessWidget {
           suffixIcon: suffixicon,
         ),
         validator: (value) {
+          String pattern = r'([0][6,7]\d{8})';
+                    RegExp passwordRegex = new RegExp(pattern);
           RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
           RegExp regex = RegExp(
               r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~.]).{8,}$');
-          if (ispassword == true && isemail == false) {
+          if (ispassword == true && isemail == false && isPhone == false) {
             if (value!.isNotEmpty) {
               if (!regex.hasMatch(value)) {
                 return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
@@ -79,10 +83,20 @@ class AppInputText extends StatelessWidget {
             } else {
               return null;
             }
-          } else if (isemail == true && isemail == true) {
+          } else if (isemail == true && ispassword == false && isPhone == false) {
             if (value!.isEmpty || !emailRegex.hasMatch(value)) {
               return 'Please enter a valid email address';
-            } else {
+            } else if (value.isEmpty) {
+              return "THis field cannot be empty";
+            }else {
+              return null;
+            }
+          } else if(isPhone == true && isemail == false && ispassword == false) {
+            if (value!.isEmpty || !passwordRegex.hasMatch(value)) {
+              return 'Please enter a valid password';
+            } else if (value.isEmpty) {
+              return "THis field cannot be empty";
+            }else {
               return null;
             }
           } else {

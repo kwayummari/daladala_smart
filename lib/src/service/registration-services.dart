@@ -13,12 +13,13 @@ class registrationService {
   Api api = Api();
 
   Future<void> registration(BuildContext context, String email, String password,
-      String rpassword, String fullname) async {
+      String rpassword, String fullname, String phone) async {
     if (password.toString() == rpassword.toString()) {
       Map<String, dynamic> data = {
         'email': email.toString(),
         'fullname': fullname.toString(),
         'password': password.toString(),
+        'phone': phone.toString(),
       };
       final response = await api.post(context, 'auth/registration.php', data);
       if (response.toString() == 'success') {

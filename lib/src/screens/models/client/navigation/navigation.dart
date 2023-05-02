@@ -129,12 +129,14 @@ class _navigationState extends State<navigation> {
                   onSuggestionSelected: (dynamic suggestion) {
                     setState(() {
                       destin.text = suggestion['name'];
-                      List d = destin.text.toString().split('-');
-                      directions = d
-                          .map((item) => {
-                                'name': item,
-                              })
-                          .toList();
+                      List<String> d = destin.text.toString().split('-');
+                      directions = List.generate(
+                          d.length,
+                          (index) => {
+                                'name': d[index],
+                                'id': (index + 1).toString(),
+                              });
+
                       destination = suggestion['id'];
                     });
                     getroutes();
@@ -193,6 +195,7 @@ class _navigationState extends State<navigation> {
                   onSuggestionSelected: (dynamic suggestion) {
                     setState(() {
                       dire.text = suggestion['name'];
+                      direction_id = suggestion['id'];
                     });
                   },
                   validator: (value) {
@@ -274,15 +277,15 @@ class _navigationState extends State<navigation> {
               height: 45,
               child: AppButton(
                   onPress: () => Navigator.pushNamed(
-                            context,
-                            RouteNames.searchBus,
-                            arguments: {
-                              'destination': destination.toString(),
-                              'dire': dire.text.toString(),
-                              'route': route.toString(),
-                            },
-                          ),
-                      // Navigator.pushNamed(context, RouteNames.searchBus),
+                        context,
+                        RouteNames.searchBus,
+                        arguments: {
+                          'destination': destination.toString(),
+                          'dire': direction_id.toString(),
+                          'route': route.toString(),
+                        },
+                      ),
+                  // Navigator.pushNamed(context, RouteNames.searchBus),
                   label: 'Submit',
                   borderRadius: 20,
                   textColor: AppConst.white,

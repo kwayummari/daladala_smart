@@ -13,12 +13,12 @@ class searchBus extends StatefulWidget {
   var destination;
   var dire;
   var route;
-  searchBus(
-      {Key? key,
-      required this.destination,
-      required this.dire,
-      required this.route,})
-      : super(key: key);
+  searchBus({
+    Key? key,
+    required this.destination,
+    required this.dire,
+    required this.route,
+  }) : super(key: key);
 
   @override
   State<searchBus> createState() => _searchBusState();
@@ -41,14 +41,14 @@ class _searchBusState extends State<searchBus> {
     await getHome().whenComplete(() async {
       await Future.delayed(Duration(seconds: 5), () {});
       Navigator.pushNamed(
-                            context,
-                            RouteNames.searchBus,
-                            arguments: {
-                              'destination': widget.destination.toString(),
-                              'dire': widget.dire.text.toString(),
-                              'route': widget.route.toString(),
-                            },
-                          );
+        context,
+        RouteNames.buses,
+        arguments: {
+          'destination': widget.destination.toString(),
+          'dire': widget.dire.toString(),
+          'route': widget.route.toString(),
+        },
+      );
     });
   }
 
@@ -110,12 +110,12 @@ class _searchBusState extends State<searchBus> {
                   ),
                   SpinKitCircle(
                     size: 70,
-                    color: AppConst.primary,
+                    color: AppConst.black,
                   ),
                   AppText(
                     txt: 'Searching for Provider',
                     size: 15,
-                    color: AppConst.primary,
+                    color: AppConst.black,
                   )
                 ],
               ),
