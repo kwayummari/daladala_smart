@@ -9,5 +9,7 @@ class RouteNames {
   static const String profile = '/profile';
   static const String bottomNavigationBar = '/bottomNavigationBar';
   static const String navigation = '/navigation';
+  static const String searchBus = '/searchBus';
   static const String pricing = '/pricing';
+  static const String buses = '/buses';
 }
