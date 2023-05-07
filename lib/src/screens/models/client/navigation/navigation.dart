@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:daladala_smart/routes/route-names.dart';
+import 'package:daladala_smart/src/service/navigation-service.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
@@ -20,21 +21,18 @@ class _navigationState extends State<navigation> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getdiscipline();
+    getDestination();
   }
 
   var destination;
   List destinations = [];
-  Future getdiscipline() async {
-    http.Response response;
-    const API_URL = 'https://daladalasmart.com/api/destination/get.php';
-    response = await http.get(Uri.parse(API_URL));
-    if (response.statusCode == 200) {
-      if (mounted)
-        setState(() {
-          destinations = json.decode(response.body);
-        });
-    }
+  Future<void> getDestination() async {
+    final navigationService _navigationService = await navigationService();
+    final List destinationsList = await _navigationService.getDestination(context, 'destination/get.php');
+
+    setState(() {
+      this.destinations = destinationsList;
+    });
   }
 
   List directions = [];
