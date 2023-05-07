@@ -20,6 +20,11 @@ class buses extends StatefulWidget {
 
 class _busesState extends State<buses> {
   @override
+  void initState() {
+    super.initState();
+    getBuses();
+  }
+  @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
         child: Column(

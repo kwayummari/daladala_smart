@@ -1,59 +1,45 @@
-import 'dart:convert';
 import 'package:daladala_smart/routes/route-names.dart';
 import 'package:daladala_smart/src/service/navigation-service.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
+import 'package:daladala_smart/src/widgets/app_typeAheadFormFIeld.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:http/http.dart' as http;
-
 class navigation extends StatefulWidget {
   const navigation({super.key});
-
   @override
   State<navigation> createState() => _navigationState();
 }
-
 class _navigationState extends State<navigation> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getDestination();
   }
-
   var destination;
   List destinations = [];
+  List directions = [];
+  var direction;
+  var direction_id;
+  var route;
+  List routes = [];
   Future<void> getDestination() async {
     final navigationService _navigationService = await navigationService();
-    final List destinationsList = await _navigationService.getDestination(context, 'destination/get.php');
-
+    final List destinationsList =
+        await _navigationService.getDestination(context, 'destination/get.php');
     setState(() {
       this.destinations = destinationsList;
     });
   }
-
-  List directions = [];
-  var direction;
-  var direction_id;
-
-  var route;
-  List routes = [];
-  Future getroutes() async {
-    http.Response response;
-    const API_URL = 'https://daladalasmart.com/api/routes/get-byid.php';
-    response = await http
-        .post(Uri.parse(API_URL), body: {'id': destination.toString()});
-    if (response.statusCode == 200) {
-      if (mounted)
-        setState(() {
-          routes = json.decode(response.body);
-        });
-    }
+  Future<void> getroutes() async {
+    final navigationService _navigationService = await navigationService();
+    final List routesList =
+        await _navigationService.getroutes(context, destination.toString());
+    setState(() {
+      this.routes = routesList;
+    });
   }
-
   TextEditingController destin = TextEditingController();
   TextEditingController dire = TextEditingController();
   TextEditingController routing = TextEditingController();
@@ -89,186 +75,104 @@ class _navigationState extends State<navigation> {
             SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
-              child: Container(
-                padding: EdgeInsets.only(left: 16, right: 16),
-                decoration: BoxDecoration(
+            TypeAheadFormFieldWidget(
+              controller: destin,
+              hintText: 'Destination',
+              hintStyle: TextStyle(color: AppConst.white, fontSize: 15),
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              suggestionsCallback: (String pattern) async {
+                List<dynamic> filteredDestinations = destinations
+                    .where((destination) => destination['name']
+                        .toLowerCase()
+                        .contains(pattern.toLowerCase()))
+                    .toList();
+                return Future.value(filteredDestinations);
+              },
+              itemBuilder: (BuildContext context, dynamic suggestion) {
+                return ListTile(
+                  title: AppText(
+                    txt: suggestion['name'],
+                    size: 15,
                     color: AppConst.primary,
-                    border: Border.all(color: AppConst.black, width: 1),
-                    borderRadius: BorderRadius.circular(20)),
-                child: TypeAheadFormField(
-                  textFieldConfiguration: TextFieldConfiguration(
-                    controller: destin,
-                    decoration: InputDecoration(
-                      hintText: 'Destination',
-                      hintStyle: TextStyle(color: AppConst.white, fontSize: 15),
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                    ),
-                    style: TextStyle(color: AppConst.white, fontSize: 15),
                   ),
-                  suggestionsCallback: (String pattern) async {
-                    // You can replace this with your own logic to fetch suggestions
-                    return destinations.where((destination) =>
-                        destination['name']
-                            .toLowerCase()
-                            .contains(pattern.toLowerCase()));
-                  },
-                  itemBuilder: (BuildContext context, dynamic suggestion) {
-                    return ListTile(
-                      title: AppText(
-                        txt: suggestion['name'],
-                        size: 15,
-                        color: AppConst.primary,
-                      ),
-                    );
-                  },
-                  onSuggestionSelected: (dynamic suggestion) {
-                    setState(() {
-                      destin.text = suggestion['name'];
-                      List<String> d = destin.text.toString().split('-');
-                      directions = List.generate(
-                          d.length,
-                          (index) => {
-                                'name': d[index],
-                                'id': (index + 1).toString(),
-                              });
+                );
+              },
+              onSuggestionSelected: (dynamic suggestion) {
+                setState(() {
+                  destin.text = suggestion['name'];
+                  List<String> d = destin.text.toString().split('-');
+                  directions = List.generate(
+                      d.length,
+                      (index) => {
+                            'name': d[index],
+                            'id': (index + 1).toString(),
+                          });
 
-                      destination = suggestion['id'];
-                    });
-                    getroutes();
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "This field cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  noItemsFoundBuilder: (BuildContext context) {
-                    return AppText(
-                      txt: 'No matching locations found.',
-                      size: 15,
-                      color: AppConst.black,
-                    );
-                  },
-                ),
-              ),
+                  destination = suggestion['id'];
+                });
+                getroutes();
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
-              child: Container(
-                padding: EdgeInsets.only(left: 16, right: 16),
-                decoration: BoxDecoration(
-                    color: AppConst.primary,
-                    border: Border.all(color: AppConst.black, width: 1),
-                    borderRadius: BorderRadius.circular(20)),
-                child: TypeAheadFormField(
-                  textFieldConfiguration: TextFieldConfiguration(
-                    controller: dire,
-                    decoration: InputDecoration(
-                      hintText: 'Direction',
-                      hintStyle: TextStyle(color: AppConst.white, fontSize: 15),
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                    ),
-                    style: TextStyle(color: AppConst.white, fontSize: 15),
-                  ),
-                  suggestionsCallback: (String pattern) async {
-                    // You can replace this with your own logic to fetch suggestions
-                    return directions.where((destination) => destination['name']
+            TypeAheadFormFieldWidget(
+              controller: dire,
+              hintText: 'Direction',
+              hintStyle: TextStyle(color: AppConst.white, fontSize: 15),
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              suggestionsCallback: (String pattern) async {
+                List<dynamic> filteredDirections = directions
+                    .where((direction) => direction['name']
                         .toLowerCase()
-                        .contains(pattern.toLowerCase()));
-                  },
-                  itemBuilder: (BuildContext context, dynamic suggestion) {
-                    return ListTile(
-                      title: AppText(
-                        txt: "To ${suggestion['name']}",
-                        size: 15,
-                        color: AppConst.primary,
-                      ),
-                    );
-                  },
-                  onSuggestionSelected: (dynamic suggestion) {
-                    setState(() {
-                      dire.text = suggestion['name'];
-                      direction_id = suggestion['id'];
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "This field cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  noItemsFoundBuilder: (BuildContext context) {
-                    return AppText(
-                      txt: 'No matching locations found.',
-                      size: 15,
-                      color: AppConst.black,
-                    );
-                  },
-                ),
-              ),
+                        .contains(pattern.toLowerCase()))
+                    .toList();
+                return Future.value(filteredDirections);
+              },
+              itemBuilder: (BuildContext context, dynamic suggestion) {
+                return ListTile(
+                  title: AppText(
+                    txt: "To ${suggestion['name']}",
+                    size: 15,
+                    color: AppConst.primary,
+                  ),
+                );
+              },
+              onSuggestionSelected: (dynamic suggestion) {
+                setState(() {
+                  dire.text = suggestion['name'];
+                  direction_id = suggestion['id'];
+                });
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
-              child: Container(
-                padding: EdgeInsets.only(left: 16, right: 16),
-                decoration: BoxDecoration(
-                    color: AppConst.primary,
-                    border: Border.all(color: AppConst.black, width: 1),
-                    borderRadius: BorderRadius.circular(20)),
-                child: TypeAheadFormField(
-                  textFieldConfiguration: TextFieldConfiguration(
-                    controller: routing,
-                    decoration: InputDecoration(
-                      hintText: 'Route',
-                      hintStyle: TextStyle(color: AppConst.white, fontSize: 15),
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                    ),
-                    style: TextStyle(color: AppConst.white, fontSize: 15),
-                  ),
-                  suggestionsCallback: (String pattern) async {
-                    // You can replace this with your own logic to fetch suggestions
-                    return routes.where((destination) => destination['name']
+            TypeAheadFormFieldWidget(
+              controller: routing,
+              hintText: 'Route',
+              hintStyle: TextStyle(color: AppConst.white, fontSize: 15),
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              suggestionsCallback: (String pattern) async {
+                List<dynamic> filteredRoutes = routes
+                    .where((routes) => routes['name']
                         .toLowerCase()
-                        .contains(pattern.toLowerCase()));
-                  },
-                  itemBuilder: (BuildContext context, dynamic suggestion) {
-                    return ListTile(
-                      title: AppText(
-                        txt: suggestion['name'],
-                        size: 15,
-                        color: AppConst.primary,
-                      ),
-                    );
-                  },
-                  onSuggestionSelected: (dynamic suggestion) {
-                    setState(() {
-                      routing.text = suggestion['name'];
-                      route = suggestion['id'];
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "This field cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                  noItemsFoundBuilder: (BuildContext context) {
-                    return AppText(
-                      txt: 'No matching locations found.',
-                      size: 15,
-                      color: AppConst.black,
-                    );
-                  },
-                ),
-              ),
+                        .contains(pattern.toLowerCase()))
+                    .toList();
+                return Future.value(filteredRoutes);
+              },
+              itemBuilder: (BuildContext context, dynamic suggestion) {
+                return ListTile(
+                  title: AppText(
+                    txt: suggestion['name'],
+                    size: 15,
+                    color: AppConst.primary,
+                  ),
+                );
+              },
+              onSuggestionSelected: (dynamic suggestion) {
+                setState(() {
+                  routing.text = suggestion['name'];
+                  route = suggestion['id'];
+                });
+              },
             ),
             Container(
               width: 330,
@@ -283,7 +187,6 @@ class _navigationState extends State<navigation> {
                           'route': route.toString(),
                         },
                       ),
-                  // Navigator.pushNamed(context, RouteNames.searchBus),
                   label: 'Submit',
                   borderRadius: 20,
                   textColor: AppConst.white,
