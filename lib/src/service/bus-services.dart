@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class busService {
   Api api = Api();
 
-  Future<void> bus(
+  Future getBus(
       BuildContext context, String destination, String direction, String route) async {
     Map<String, dynamic> data = {
       'destination': destination.toString(),

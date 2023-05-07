@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/service/bus-services.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
@@ -24,6 +25,17 @@ class _busesState extends State<buses> {
     super.initState();
     getBuses();
   }
+
+  List buses = [];
+  Future<void> getBuses() async {
+    final busService _busesService = await busService();
+    final List busesList = await _busesService.getBus(
+        context, widget.destination, widget.dire, widget.route);
+    setState(() {
+      this.buses = busesList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
