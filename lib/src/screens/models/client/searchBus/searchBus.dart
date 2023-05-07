@@ -39,7 +39,7 @@ class _searchBusState extends State<searchBus> {
 
   _navigatortohome() async {
     await getHome().whenComplete(() async {
-      await Future.delayed(Duration(seconds: 5), () {});
+      await Future.delayed(Duration(seconds: 3), () {});
       Navigator.pushNamed(
         context,
         RouteNames.buses,
