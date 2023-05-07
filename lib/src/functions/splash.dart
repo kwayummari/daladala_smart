@@ -39,35 +39,31 @@ class SplashFunction {
     intro = intr;
   }
 
-  Future<void> getEmail() async {
+  Future<String> getEmail() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var e = sharedPreferences.getString('email');
-    email = e;
-    return email;
+    return e.toString();
   }
 
-  Future<void> getId() async {
+  Future<String> getId() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var i = sharedPreferences.getString('id');
-    id = i;
-    return id;
+    return i.toString();
   }
 
-  Future<void> getRole() async {
+  Future<String> getRole() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var r = sharedPreferences.getString('role');
-    role = r;
-    return role;
+    return r.toString();
   }
 
-  Future<void> getIntro() async {
+  Future<String> getIntro() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var intr = sharedPreferences.getString('intro');
-    intro = intr;
-    return intro;
+    return intr.toString();
   }
 }

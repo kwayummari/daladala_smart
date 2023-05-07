@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:daladala_smart/src/provider/login-provider.dart';
 import 'package:daladala_smart/src/widgets/app_snackbar.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:daladala_smart/routes/route-names.dart';
 import '../api/apis.dart';
 
 class loginService {
-  static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
   Api api = Api();
 
   Future<void> login(

@@ -16,9 +16,9 @@ class bottomNavigation extends StatefulWidget {
 class _bottomNavigationState extends State<bottomNavigation> {
   int index = 1;
   final Screen = [
-    profile(),
-    dashboard(),
     rides(),
+    dashboard(),
+    profile(),
   ];
 
   @override
@@ -33,26 +33,23 @@ class _bottomNavigationState extends State<bottomNavigation> {
             extendBody: true,
             bottomNavigationBar: Theme(
               data: Theme.of(context).copyWith(
-                  canvasColor: AppConst.black,
-                  primaryColor: AppConst.black,
-                  // textTheme: Theme.of(context).textTheme.copyWith(
-                  //     bodySmall:
-                  //         GoogleFonts.vesperLibre(color: HexColor('#cbdd33')))
-                          ),
+                canvasColor: AppConst.black,
+                primaryColor: AppConst.black,
+                // textTheme: Theme.of(context).textTheme.copyWith(
+                //     bodySmall:
+                //         GoogleFonts.vesperLibre(color: HexColor('#cbdd33')))
+              ),
               child: BottomNavigationBar(
                 selectedItemColor: AppConst.primary,
                 unselectedItemColor: AppConst.grey,
                 backgroundColor: AppConst.black,
                 items: [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.car_rental),
-                      label: 'My Rides'),
-                      BottomNavigationBarItem(
-                      icon: Icon(Icons.home),
-                      label: 'Home'),
-                      BottomNavigationBarItem(
-                      icon: Icon(Icons.person_search_sharp),
-                      label: 'Profile'),
+                      icon: Icon(Icons.car_rental), label: 'My Rides'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home), label: 'Home'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.person_search_sharp), label: 'Profile'),
                 ],
                 currentIndex: index,
                 onTap: (index) {

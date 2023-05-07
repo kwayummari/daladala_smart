@@ -1,5 +1,6 @@
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class AppBaseScreen extends StatelessWidget {
   final Widget child;
@@ -60,7 +61,9 @@ class AppBaseScreen extends StatelessWidget {
                 Container(
                   color: AppConst.black.withOpacity(0.85),
                 ),
-              if (isLoading == true) const CircularProgressIndicator(),
+              if (isLoading == true) Center(child:  SpinKitCircle(
+                      color: AppConst.primary,
+                    )),
               if (isvisible == true)
                 Positioned(
                   top: 0,

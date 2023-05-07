@@ -1,7 +1,7 @@
 import 'package:daladala_smart/routes/route-names.dart';
 import 'package:daladala_smart/src/service/map-serivces.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
-import 'package:daladala_smart/src/widgets/app-map.dart';
+import 'package:daladala_smart/src/widgets/app_map.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +79,7 @@ class _searchBusState extends State<searchBus> {
                         LatLng(position!.latitude, position!.longitude),
                     markers: Set<Marker>.of([
                       Marker(
-                        markerId: MarkerId("Userlocation"),
+                        markerId: MarkerId("Your location"),
                         position:
                             LatLng(position!.latitude, position!.longitude),
                         icon: BitmapDescriptor.defaultMarker,

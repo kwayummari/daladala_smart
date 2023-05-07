@@ -19,16 +19,21 @@ class _IntroScreenState extends State<IntroScreen> {
       title: "Let\'s Travel",
       description: "Move Purposefully!",
       backgroundColor: AppConst.primary,
+      centerText:
+          'Offers a convenient way to plan your commute and get around town.',
     ),
     Slide(
       title: "Let\'s Travel",
       description: "Move Purposefully!",
       backgroundColor: AppConst.primary,
+      centerText:
+          'Rely on daladala smart up-to-date schedules and real-time information about your bus route.',
     ),
     Slide(
       title: "Let\'s Travel",
       description: "Move Purposefully!",
       backgroundColor: AppConst.primary,
+      centerText: 'Save money on transportation costs with the daladala app',
     ),
   ];
   Color activeColor = const Color(0xFF00967B);

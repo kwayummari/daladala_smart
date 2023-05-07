@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppText extends StatelessWidget {
   // final Widget child;
   final String? txt;
+  final TextAlign? align;
   var color;
   var weight;
   double size;
@@ -11,6 +12,7 @@ class AppText extends StatelessWidget {
       {Key? key,
       required this.txt,
       this.color,
+      this.align,
       this.weight,
       this.textdecoration,
       required this.size})
@@ -20,6 +22,7 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       txt.toString(),
+      textAlign: align ?? null,
       style: TextStyle(
         decoration: textdecoration,
         color: color,

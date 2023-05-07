@@ -5,9 +5,10 @@ class profileService {
   Api api = Api();
   Future profile(BuildContext context, String id) async {
     Map<String, dynamic> data = {
-        'id': id.toString(),
-      };
+      'id': id.toString(),
+    };
     final response = await api.post(context, 'profile/get.php', data);
-    return response;
+    List datas = response;
+    return datas;
   }
 }

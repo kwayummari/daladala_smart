@@ -8,12 +8,14 @@ class Slide extends StatelessWidget {
   final String title;
   final String description;
   final Color backgroundColor;
+  final String? centerText;
 
   Slide({
     Key? key,
     required this.title,
     required this.description,
     required this.backgroundColor,
+    required this.centerText,
   }) : super(key: key);
 
   @override
@@ -31,10 +33,27 @@ class Slide extends StatelessWidget {
           color: AppConst.black.withOpacity(0.85),
         ),
         Center(
-          child: Image.asset(
-            'assets/icon.png',
-            height: 150,
-            width: 150,
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 3,
+              ),
+              Image.asset(
+                'assets/icon.png',
+                height: 150,
+                width: 150,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AppText(
+                  align: TextAlign.center,
+                  txt: centerText,
+                  size: 20,
+                  weight: FontWeight.w700,
+                  color: AppConst.white,
+                ),
+              ),
+            ],
           ),
         ),
         Positioned(

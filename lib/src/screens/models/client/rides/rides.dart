@@ -15,6 +15,16 @@ class _ridesState extends State<rides> {
         isvisible: false,
         backgroundImage: false,
         backgroundAuth: false,
-        child: Container());
+        child: Container(
+          width: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                width: 0.2,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ));
   }
 }
