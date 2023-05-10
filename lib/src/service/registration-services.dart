@@ -12,8 +12,7 @@ class registrationService {
   Api api = Api();
 
   Future<void> registration(BuildContext context, String email, String password,
-      String rpassword, String fullname, String phone) async {
-    if (password.toString() == rpassword.toString()) {
+       String fullname, String phone) async {
       Map<String, dynamic> data = {
         'email': email.toString(),
         'fullname': fullname.toString(),
@@ -41,11 +40,5 @@ class registrationService {
           response: response.toString(),
         ).show(context);
       }
-    } else {
-      AppSnackbar(
-        isError: true,
-        response: 'Something went wrong!',
-      ).show(context);
-    }
   }
 }

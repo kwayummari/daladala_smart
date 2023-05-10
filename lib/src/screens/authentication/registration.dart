@@ -19,7 +19,6 @@ class _RegistrationState extends State<Registration> {
   TextEditingController fullname = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController rpassword = TextEditingController();
   TextEditingController phone = TextEditingController();
   bool dont_show_password = true;
   bool obscure = true;
@@ -28,172 +27,130 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
-      padding: const EdgeInsets.all(0),
-      isvisible: true,
+      isvisible: false,
       backgroundImage: false,
-      backgroundAuth: true,
+      backgroundAuth: false,
       child: Form(
           key: _formKey,
           child: Column(
             children: [
               SizedBox(
-                height: 80,
+                height: 70,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-                child: Image.asset('assets/logo1.png'),
-              ),
+              AppText(txt: 'Create an account', size: 30, color: AppConst.white, weight: FontWeight.w900,),
               SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: AppText(
-                    txt: 'Create your \n Account',
-                    size: 30,
-                    weight: FontWeight.w900,
-                    color: AppConst.white,
+              AppText(txt: 'Sign up to get started', size: 15, color: AppConst.white, weight: FontWeight.bold,),
+              SizedBox(height: 20,),
+              Column(
+                children: [
+                  AppInputText(
+                    textsColor: AppConst.black,
+                    isemail: false,
+                    textfieldcontroller: fullname,
+                    ispassword: false,
+                    fillcolor: AppConst.white,
+                    label: 'Fullname',
+                    obscure: false,
+                    icon: Icon(
+                      Icons.person,
+                      color: AppConst.black,
+                    ),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(color: AppConst.black),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: Column(
-                    children: [
-                      AppInputText(
-                        isemail: false,
-                        textfieldcontroller: fullname,
-                        ispassword: false,
-                        fillcolor: AppConst.primary,
-                        label: 'Fullname',
-                        obscure: false,
-                        icon: Icon(
-                          Icons.person,
-                          color: AppConst.white,
-                        ),
-                      ),
-                      AppInputText(
-                        isemail: false,
-                        isPhone: true,
-                        textfieldcontroller: phone,
-                        ispassword: false,
-                        fillcolor: AppConst.primary,
-                        label: 'Phone number',
-                        obscure: false,
-                        icon: Icon(
-                          Icons.phone,
-                          color: AppConst.white,
-                        ),
-                      ),
-                      AppInputText(
-                          isemail: true,
-                          textfieldcontroller: email,
-                          ispassword: false,
-                          fillcolor: AppConst.primary,
-                          label: 'Email',
-                          obscure: false),
-                      AppInputText(
-                        isemail: false,
-                        suffixicon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                obscure = !obscure;
-                              });
-                            },
-                            icon: obscure == true
-                                ? Icon(Icons.visibility_off)
-                                : Icon(Icons.visibility)),
-                        textfieldcontroller: password,
-                        ispassword: true,
-                        fillcolor: AppConst.primary,
-                        label: 'Password',
-                        obscure: obscure,
-                        icon: Icon(
-                          Icons.lock,
-                          color: AppConst.white,
-                        ),
-                      ),
-                      AppInputText(
-                        isemail: false,
-                        suffixicon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                obscure1 = !obscure1;
-                              });
-                            },
-                            icon: obscure1 == true
-                                ? Icon(Icons.visibility_off)
-                                : Icon(Icons.visibility)),
-                        textfieldcontroller: rpassword,
-                        ispassword: false,
-                        fillcolor: AppConst.primary,
-                        label: 'Password',
-                        obscure: obscure1,
-                        icon: Icon(
-                          Icons.lock,
-                          color: AppConst.white,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        width: 350,
-                        height: 55,
-                        child: AppButton(
-                          onPress: () {
-                            if (!_formKey.currentState!.validate()) {
-                              return;
-                            }
-                            registrationService().registration(
-                                context,
-                                email.text,
-                                password.text,
-                                rpassword.text,
-                                fullname.text,phone.text);
-                          },
-                          label: 'SIGN UP',
-                          borderRadius: 20,
-                          textColor: AppConst.white,
-                          bcolor: AppConst.primary,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12, right: 8, top: 8, bottom: 8),
-                        child: GestureDetector(
-                          onTap: () =>
-                              Navigator.pushNamed(context, RouteNames.login),
-                          child: Row(
-                            children: [
-                              AppText(
-                                txt: 'Already have an account?',
-                                size: 15,
-                                color: AppConst.white,
-                                weight: FontWeight.w400,
-                              ),
-                              AppText(
-                                txt: 'Sign In',
-                                size: 15,
-                                color: AppConst.primary,
-                                weight: FontWeight.bold,
-                              ),
-                            ],
+                  AppInputText(
+                    textsColor: AppConst.black,
+                    isemail: false,
+                    isPhone: true,
+                    textfieldcontroller: phone,
+                    ispassword: false,
+                    fillcolor: AppConst.white,
+                    label: 'Phone number',
+                    obscure: false,
+                    icon: Icon(
+                      Icons.phone,
+                      color: AppConst.black,
+                    ),
+                  ),
+                  AppInputText(
+                      textsColor: AppConst.black,
+                      isemail: true,
+                      textfieldcontroller: email,
+                      ispassword: false,
+                      fillcolor: AppConst.white,
+                      label: 'Email',
+                      obscure: false),
+                  AppInputText(
+                    textsColor: AppConst.black,
+                    isemail: false,
+                    suffixicon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            obscure = !obscure;
+                          });
+                        },
+                        icon: obscure == true
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility)),
+                    textfieldcontroller: password,
+                    ispassword: true,
+                    fillcolor: AppConst.white,
+                    label: 'Password',
+                    obscure: obscure,
+                    icon: Icon(
+                      Icons.lock,
+                      color: AppConst.black,
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    width: 350,
+                    height: 49,
+                    child: AppButton(
+                      onPress: () {
+                        if (!_formKey.currentState!.validate()) {
+                          return;
+                        }
+                        registrationService().registration(
+                            context,
+                            email.text,
+                            password.text,
+                            fullname.text,phone.text);
+                      },
+                      label: 'SIGN UP',
+                      borderRadius: 20,
+                      textColor: AppConst.white,
+                      bcolor: AppConst.primary,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 12, right: 8, top: 8, bottom: 8),
+                    child: GestureDetector(
+                      onTap: () =>
+                          Navigator.pushNamed(context, RouteNames.login),
+                      child: Row(
+                        children: [
+                          AppText(
+                            txt: 'Already have an account?',
+                            size: 15,
+                            color: AppConst.white,
+                            weight: FontWeight.w400,
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                          AppText(
+                            txt: 'Sign In',
+                            size: 15,
+                            color: AppConst.primary,
+                            weight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               )
             ],
           )),

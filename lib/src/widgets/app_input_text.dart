@@ -7,6 +7,7 @@ class AppInputText extends StatelessWidget {
   final String? label;
   final Icon? icon;
   final Color? fillcolor;
+  final Color? textsColor;
   final IconButton? suffixicon;
   final bool obscure;
   final Function? validate;
@@ -22,6 +23,7 @@ class AppInputText extends StatelessWidget {
     required this.ispassword,
     required this.isemail,
     required this.fillcolor,
+    this.textsColor,
     this.icon,
     this.suffixicon,
     this.onChange,
@@ -37,7 +39,7 @@ class AppInputText extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
       child: TextFormField(
         enabled: enabled ?? true,
-        style: TextStyle(color: AppConst.white),
+        style: TextStyle(color: textsColor ?? AppConst.white),
         onChanged: onChange,
         obscureText: obscure,
         obscuringCharacter: '*',
@@ -47,11 +49,11 @@ class AppInputText extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
           ),
           label: Container(
-            color: AppConst.primary,
+            color: fillcolor,
             child: AppText(
               txt: label,
               size: 15,
-              color: AppConst.white,
+              color: textsColor ?? AppConst.white,
             ),
           ),
           filled: true,
