@@ -76,14 +76,20 @@ class _LoginState extends State<Login> {
               AppInputText(
                 isemail: false,
                 textfieldcontroller: password,
-                ispassword: true,
+                ispassword: dont_show_password,
                 fillcolor: AppConst.primary,
                 label: 'Password',
-                obscure: false,
+                obscure: dont_show_password,
                 icon: Icon(
                   Icons.lock,
                   color: AppConst.white,
                 ),
+                suffixicon: IconButton(onPressed: () {
+                  setState(() {
+                    dont_show_password = !dont_show_password;
+                  });
+                  print(dont_show_password);
+                }, icon: Icon(dont_show_password ? Icons.visibility_off : Icons.visibility)),
               ),
               Row(
                 children: [

@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:io';
 import 'package:daladala_smart/src/provider/login-provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
@@ -19,9 +17,6 @@ Future main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-   if(Platform.isAndroid) {
-    AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
-  }
   runApp(
      const MyApp()
     );
