@@ -1,4 +1,5 @@
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/widgets/socialMedia.dart';
 import 'package:flutter/material.dart';
 import 'package:daladala_smart/routes/route-names.dart';
 import 'package:daladala_smart/src/service/registration-services.dart';
@@ -19,6 +20,7 @@ class _RegistrationState extends State<Registration> {
   TextEditingController fullname = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController rpassword = TextEditingController();
   TextEditingController phone = TextEditingController();
   bool dont_show_password = true;
   bool obscure = true;
@@ -35,7 +37,7 @@ class _RegistrationState extends State<Registration> {
           child: Column(
             children: [
               SizedBox(
-                height: 70,
+                height: 40,
               ),
               AppText(txt: 'Create an account', size: 30, color: AppConst.white, weight: FontWeight.w900,),
               SizedBox(
@@ -102,7 +104,28 @@ class _RegistrationState extends State<Registration> {
                       color: AppConst.black,
                     ),
                   ),
-
+                  AppInputText(
+                    textsColor: AppConst.black,
+                    isemail: false,
+                    suffixicon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            obscure1 = !obscure1;
+                          });
+                        },
+                        icon: obscure1 == true
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility)),
+                    textfieldcontroller: rpassword,
+                    ispassword: false,
+                    fillcolor: AppConst.white,
+                    label: 'Password',
+                    obscure: obscure1,
+                    icon: Icon(
+                      Icons.lock,
+                      color: AppConst.black,
+                    ),
+                  ),
                   SizedBox(
                     height: 30,
                   ),
@@ -118,6 +141,7 @@ class _RegistrationState extends State<Registration> {
                             context,
                             email.text,
                             password.text,
+                            rpassword.text,
                             fullname.text,phone.text);
                       },
                       label: 'SIGN UP',
@@ -127,27 +151,37 @@ class _RegistrationState extends State<Registration> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 12, right: 8, top: 8, bottom: 8),
-                    child: GestureDetector(
-                      onTap: () =>
-                          Navigator.pushNamed(context, RouteNames.login),
-                      child: Row(
-                        children: [
-                          AppText(
-                            txt: 'Already have an account?',
-                            size: 15,
-                            color: AppConst.white,
-                            weight: FontWeight.w400,
-                          ),
-                          AppText(
-                            txt: 'Sign In',
-                            size: 15,
-                            color: AppConst.primary,
-                            weight: FontWeight.bold,
-                          ),
-                        ],
-                      ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Align(
+                            alignment: Alignment.center,
+                            child: AppText(txt: 'By continuing you accept ', size: 15, color: AppConst.white,)),
+                        AppText(txt: 'terms and conditions and our privacy policy', size: 15, color: AppConst.primary,)
+                      ],
+                    ),
+                  ),
+                  socialMedia(),
+                  GestureDetector(
+                    onTap: () =>
+                        Navigator.pushNamed(context, RouteNames.login),
+                    child: Row(
+                      children: [
+                        Spacer(),
+                        AppText(
+                          txt: 'Already have an account?',
+                          size: 15,
+                          color: AppConst.white,
+                          weight: FontWeight.w400,
+                        ),
+                        AppText(
+                          txt: 'Sign In',
+                          size: 15,
+                          color: AppConst.primary,
+                          weight: FontWeight.bold,
+                        ),
+                        Spacer(),
+                      ],
                     ),
                   )
                 ],

@@ -3,6 +3,7 @@ import 'package:daladala_smart/src/provider/login-provider.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_input_text.dart';
+import 'package:daladala_smart/src/widgets/socialMedia.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -62,57 +63,46 @@ class _LoginState extends State<Login> {
                 height: 30,
               ),
               AppInputText(
+                textsColor: AppConst.black,
                 textfieldcontroller: email,
                 ispassword: false,
-                fillcolor: AppConst.primary,
+                fillcolor: AppConst.white,
                 label: 'Email',
                 obscure: false,
                 icon: Icon(
                   Icons.person,
-                  color: AppConst.white,
+                  color: AppConst.black,
                 ),
                 isemail: true,
               ),
               AppInputText(
+                textsColor: AppConst.black,
                 isemail: false,
                 textfieldcontroller: password,
                 ispassword: dont_show_password,
-                fillcolor: AppConst.primary,
+                fillcolor: AppConst.white,
                 label: 'Password',
                 obscure: dont_show_password,
                 icon: Icon(
                   Icons.lock,
-                  color: AppConst.white,
+                  color: AppConst.black,
                 ),
                 suffixicon: IconButton(onPressed: () {
                   setState(() {
                     dont_show_password = !dont_show_password;
                   });
-                  print(dont_show_password);
                 }, icon: Icon(dont_show_password ? Icons.visibility_off : Icons.visibility)),
               ),
-              Row(
-                children: [
-                  Spacer(),
-                  Checkbox(
-                    fillColor: MaterialStateProperty.resolveWith<Color?>(
-                      (Set<MaterialState> states) => AppConst.primary,
-                    ),
-                    activeColor: AppConst.primary,
-                    value: marked,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        marked = !marked;
-                      });
-                    },
-                  ),
-                  AppText(
-                    txt: 'Remember me',
+              Padding(
+                padding: const EdgeInsets.only(right: 20, top: 20),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: AppText(
+                    txt: 'Forgot password?',
                     size: 15,
-                    color: AppConst.white,
+                    color: AppConst.primary,
                   ),
-                  Spacer()
-                ],
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -136,24 +126,7 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 10,
               ),
-              GestureDetector(
-                onTap: () => null,
-                child: Container(
-                  width: 60,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Image.asset(
-                    'assets/google.png',
-                    height: 40,
-                  ),
-                ),
-              ),
+              socialMedia(),
               SizedBox(
                 height: 20,
               ),
