@@ -2,6 +2,7 @@ import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_datePicker.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
+import 'package:daladala_smart/src/widgets/app_timePicker.dart';
 import 'package:flutter/material.dart';
 
 class bookBus extends StatefulWidget {
@@ -15,6 +16,7 @@ class bookBus extends StatefulWidget {
 
 class _bookBusState extends State<bookBus> {
   var datePickup;
+  var timePickup;
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +57,15 @@ class _bookBusState extends State<bookBus> {
               height: 20,
             ),
             Align(
-              alignment: Alignment.centerLeft,
+                alignment: Alignment.centerLeft,
                 child: AppText(
-              txt: 'Select a pickup date',
-              size: 15,
-              color: AppConst.white,
-            )),
-            SizedBox(height: 10,),
+                  txt: 'Select a pickup date',
+                  size: 15,
+                  color: AppConst.white,
+                )),
+            SizedBox(
+              height: 10,
+            ),
             CustomizableDatePicker(
               title: 'Select a pickup date',
               onDateSelected: (date) {
@@ -75,15 +79,31 @@ class _bookBusState extends State<bookBus> {
               todayColor: AppConst.primary,
               textColor: AppConst.black,
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Align(
                 alignment: Alignment.centerLeft,
                 child: AppText(
-                  txt: 'Select a pickup date',
+                  txt: 'Select a pickup time',
                   size: 15,
                   color: AppConst.white,
                 )),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
+            CustomizableTimePicker(
+                backgroundColor: AppConst.white,
+                buttonColor: AppConst.primary,
+                selectedColor: AppConst.primary,
+                todayColor: AppConst.primary,
+                textColor: AppConst.black,
+                title: 'Select a pickup time',
+                onTimeSelected: (time) {
+                  setState(() {
+                    timePickup = time;
+                  });
+                })
           ],
         ),
         isvisible: false,
