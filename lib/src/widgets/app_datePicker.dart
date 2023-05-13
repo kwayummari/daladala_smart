@@ -14,11 +14,11 @@ class CustomizableDatePicker extends StatefulWidget {
     Key? key,
     required this.title,
     required this.onDateSelected,
-    this.backgroundColor = Colors.white,
-    this.buttonColor = Colors.blue,
-    this.selectedColor = Colors.blue,
-    this.todayColor = Colors.grey,
-    this.textColor = Colors.black,
+    required this.backgroundColor,
+    required this.buttonColor,
+    required this.selectedColor,
+    required this.todayColor,
+    required this.textColor,
   }) : super(key: key);
 
   @override
