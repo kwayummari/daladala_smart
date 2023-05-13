@@ -1,4 +1,4 @@
-import 'package:daladala_smart/routes/route-names.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

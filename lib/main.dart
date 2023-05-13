@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:daladala_smart/src/provider/login-provider.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
-import 'package:daladala_smart/routes/routes.dart';
-import 'package:daladala_smart/routes/route-names.dart';
+import 'package:daladala_smart/src/utils/routes/routes.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");

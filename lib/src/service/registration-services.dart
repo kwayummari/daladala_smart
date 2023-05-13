@@ -1,11 +1,11 @@
 import 'package:daladala_smart/src/api/apis.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:daladala_smart/src/widgets/app_snackbar.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:daladala_smart/routes/route-names.dart';
 
 class registrationService {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';

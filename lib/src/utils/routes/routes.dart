@@ -1,17 +1,18 @@
 import 'package:daladala_smart/src/screens/introduction/intro.dart';
 import 'package:daladala_smart/src/screens/models/client/bottomNavigationBar/bottomNavigationBar.dart';
 import 'package:daladala_smart/src/screens/models/client/buses/buses.dart';
+import 'package:daladala_smart/src/screens/models/client/buses/exploreBuses.dart';
 import 'package:daladala_smart/src/screens/models/client/dashboard/dashboard.dart';
 import 'package:daladala_smart/src/screens/models/client/navigation/navigation.dart';
 import 'package:daladala_smart/src/screens/models/client/pricing/pricing.dart';
 import 'package:daladala_smart/src/screens/models/client/profile/profile.dart';
 import 'package:daladala_smart/src/screens/models/client/rides/rides.dart';
 import 'package:daladala_smart/src/screens/models/client/searchBus/searchBus.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:flutter/material.dart';
 import 'package:daladala_smart/src/screens/authentication/login.dart';
 import 'package:daladala_smart/src/screens/authentication/registration.dart';
 import 'package:daladala_smart/src/screens/splash/splash.dart';
-import 'package:daladala_smart/routes/route-names.dart';
 
 
 final Map<String, WidgetBuilder> routes = {
@@ -43,4 +44,11 @@ RouteNames.buses: (context) {
     route: args?['route'],
   );
 },
+  RouteNames.exploreBuses: (context) {
+    final Map<String, dynamic>? args =
+    ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    return exploreBuses(
+      id: args?['id'],
+    );
+  },
 };

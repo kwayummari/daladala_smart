@@ -1,13 +1,12 @@
-import 'package:daladala_smart/routes/route-names.dart';
 import 'package:daladala_smart/src/service/map-serivces.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
-import 'package:daladala_smart/src/widgets/app_map.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
+import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class searchBus extends StatefulWidget {
   var destination;
@@ -39,7 +38,7 @@ class _searchBusState extends State<searchBus> {
 
   _navigatortohome() async {
     await getHome().whenComplete(() async {
-      await Future.delayed(Duration(seconds: 3), () {});
+      await Future.delayed(Duration(seconds: 5), () {});
       Navigator.pushNamed(
         context,
         RouteNames.buses,
@@ -58,68 +57,28 @@ class _searchBusState extends State<searchBus> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
-      isvisible: false,
+      isvisible: true,
       backgroundImage: false,
       backgroundAuth: false,
       padding: EdgeInsets.all(0),
-      child: Stack(
+      child: Column(
         children: [
-          FutureBuilder(
-            future: getHome(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else {
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: CustomGoogleMap(
-                    initialCameraPosition:
-                        LatLng(position!.latitude, position!.longitude),
-                    markers: Set<Marker>.of([
-                      Marker(
-                        markerId: MarkerId("Your location"),
-                        position:
-                            LatLng(position!.latitude, position!.longitude),
-                        icon: BitmapDescriptor.defaultMarker,
-                        infoWindow: InfoWindow(
-                          title: 'Your Location',
-                          onTap: () => null,
-                        ),
-                      ),
-                    ]),
-                  ),
-                );
-              }
-            },
+          SizedBox(height: 150,),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Image.asset('assets/kfc.jpg'),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: MediaQuery.of(context).size.height,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppConst.blackOpacity,
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 2,
-                  ),
-                  SpinKitCircle(
-                    size: 70,
-                    color: AppConst.black,
-                  ),
-                  AppText(
-                    txt: 'Searching for Provider',
-                    size: 15,
-                    color: AppConst.black,
-                  )
-                ],
-              ),
-            ),
+          SizedBox(height: 10,),
+          AppText(txt: 'Get 10% off when you order \n      with our promo code', size: 20, weight: FontWeight.w900, color: AppConst.gold,),
+          AppButton(onPress: () => null, label: "Order Now", borderRadius: 20, textColor: AppConst.white, bcolor: AppConst.primary),
+          SpinKitThreeInOut(
+            size: 50,
+            color: AppConst.white,
+          ),
+          AppText(
+            txt: 'Searching for Provider',
+            size: 15,
+            color: AppConst.white,
           ),
         ],
       ),

@@ -12,4 +12,5 @@ class RouteNames {
   static const String searchBus = '/searchBus';
   static const String pricing = '/pricing';
   static const String buses = '/buses';
+  static const String exploreBuses = '/exploreBuses';
 }

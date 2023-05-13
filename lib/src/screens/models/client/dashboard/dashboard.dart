@@ -1,6 +1,6 @@
-import 'package:daladala_smart/routes/route-names.dart';
 import 'package:daladala_smart/src/service/map-serivces.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:daladala_smart/src/widgets/app_map.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_input_text.dart';
