@@ -1,3 +1,5 @@
+import 'package:daladala_smart/src/screens/models/client/buses/view.dart';
+import 'package:daladala_smart/src/service/exploreBusesDetails-service.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
@@ -16,20 +18,23 @@ class _exploreBusesState extends State<exploreBuses> {
   @override
   void initState() {
     super.initState();
-    _futureBusDetailsList = getBusesDetails();
+    // _futureBusDetailsList = getBusesDetails();
+    getBusesDetails();
   }
+  List details = [];
   Future<List> getBusesDetails() async {
-    final busService _busesService = await busService();
-    final List busesList = await _busesService.getBus(
-        context, widget.destination, widget.dire, widget.route);
-    return busesList;
+    final busDetailsService _busesDetailsService = await busDetailsService();
+    final List busesDetailsList = await _busesDetailsService.getBusDetails(
+        context, widget.id);
+    setState(() {
+      details = busesDetailsList;
+    });
+    return busesDetailsList;
   }
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
-        child: Container(
-          child: AppText(txt: widget.id.toString(), size: 15, color: AppConst.white,),
-        ),
+        child: viewBusDetails(driver: details[0]['driver_name'], conductor: details[0]['conductor_name'], number_of_seat: details[0]['number_of_seat'], bus_type: details[0]['bus_type'], owner: details[0]['owner'], image: details[0]['image']),
         isvisible: false,
         backgroundImage: false,
         backgroundAuth: false,
