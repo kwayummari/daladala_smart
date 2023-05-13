@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:daladala_smart/src/functions/createMaterialColor.dart';
 import 'package:daladala_smart/src/provider/login-provider.dart';
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,12 +46,12 @@ class MyApp extends StatelessWidget {
       title: 'DALADALA SMART',
       theme: ThemeData(
           // timePickerTheme: Theme.of(context).primaryColor,
-          cardColor: Colors.green.shade400,
-          highlightColor: Colors.green.shade400,
-          splashColor: Colors.green.shade400,
-          primaryColor: Colors.green.shade700,
+          cardColor: AppConst.primary,
+          highlightColor: AppConst.primary,
+          splashColor: AppConst.primary,
+          primaryColor: AppConst.primary,
           visualDensity: VisualDensity.adaptivePlatformDensity,
            colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.green,
-            ).copyWith(background: Colors.green.shade400)),));
+            primarySwatch: createMaterialColor(AppConst.primary),
+            ).copyWith(background: AppConst.primary)),));
 }

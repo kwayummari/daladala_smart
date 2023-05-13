@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CustomizableDatePicker extends StatefulWidget {
   final String title;
   final Function(DateTime) onDateSelected;
-  final Color textColor;
+  final Color backgroundColor;
   final Color buttonColor;
   final Color selectedColor;
   final Color todayColor;
-  final Color backgroundColor;
+  final Color textColor;
 
-  CustomizableDatePicker({
+  const CustomizableDatePicker({
+    Key? key,
     required this.title,
     required this.onDateSelected,
-    this.textColor = Colors.white,
+    this.backgroundColor = Colors.white,
     this.buttonColor = Colors.blue,
-    this.selectedColor = Colors.red,
-    this.todayColor = Colors.green,
-    this.backgroundColor = Colors.grey,
-  });
+    this.selectedColor = Colors.blue,
+    this.todayColor = Colors.grey,
+    this.textColor = Colors.black,
+  }) : super(key: key);
 
   @override
   _CustomizableDatePickerState createState() => _CustomizableDatePickerState();
@@ -25,109 +27,70 @@ class CustomizableDatePicker extends StatefulWidget {
 
 class _CustomizableDatePickerState extends State<CustomizableDatePicker> {
   late DateTime _selectedDate;
+  late DateFormat _dateFormat;
 
   @override
   void initState() {
     super.initState();
     _selectedDate = DateTime.now();
+    _dateFormat = DateFormat('EEEE, MMMM d, y');
   }
+
+  void _selectDate(BuildContext context) async {
+    final now = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(now.year, 12, 31),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        widget.onDateSelected(picked);
+      });
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.title,
-          style: TextStyle(
-            color: widget.textColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        SizedBox(height: 10),
-        Container(
-          decoration: BoxDecoration(
-            color: widget.backgroundColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    _selectedDate = _selectedDate.subtract(Duration(days: 1));
-                  });
-                },
-                icon: Icon(Icons.arrow_back),
+        GestureDetector(
+          onTap: () {
+            _selectDate(context);
+          },
+          child: Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: widget.backgroundColor,
+              border: Border.all(
                 color: widget.buttonColor,
+                width: 2.0,
               ),
-              Text(
-                '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                style: TextStyle(
-                  color: widget.textColor,
-                  fontSize: 16,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    _selectedDate = _selectedDate.add(Duration(days: 1));
-                  });
-                },
-                icon: Icon(Icons.arrow_forward),
-                color: widget.buttonColor,
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 10),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: 31,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 7,
-            childAspectRatio: 1.2,
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            DateTime date = DateTime(_selectedDate.year, _selectedDate.month, index + 1);
-            bool isToday = date.day == DateTime.now().day &&
-                date.month == DateTime.now().month &&
-                date.year == DateTime.now().year;
-            bool isSelected = date.day == _selectedDate.day &&
-                date.month == _selectedDate.month &&
-                date.year == _selectedDate.year;
-
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  _selectedDate = date;
-                });
-                widget.onDateSelected(date);
-              },
-              child: Container(
-                margin: EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: isToday
-                      ? widget.todayColor
-                      : isSelected
-                      ? widget.selectedColor
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Center(
-                  child: Text(
-                    '${index + 1}',
-                    style: TextStyle(
-                      color: isSelected ? Colors.white : widget.textColor,
-                    ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  _dateFormat.format(_selectedDate),
+                  style: TextStyle(
+                    color: widget.textColor,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            );
-          },
+                Icon(
+                  Icons.calendar_today,
+                  color: widget.buttonColor,
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );
