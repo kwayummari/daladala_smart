@@ -2,28 +2,34 @@
 
 import 'package:daladala_smart/src/utils/animations/fadeanimation.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
+import 'package:daladala_smart/src/widgets/app-image-network.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class viewBusDetails extends StatefulWidget {
+  var id;
   var driver;
   var conductor;
   var number_of_seat;
   var bus_type;
   var owner;
   var image;
+  var busNumber;
+
   // ignore: non_constant_identifier_names
-  viewBusDetails(
-      {Key? key,
-        required this.driver,
-        required this.conductor,
-        required this.number_of_seat,
-        required this.bus_type,
-        required this.owner,
-        required this.image,})
-      : super(key: key);
+  viewBusDetails({
+    Key? key,
+    required this.id,
+    required this.driver,
+    required this.conductor,
+    required this.number_of_seat,
+    required this.bus_type,
+    required this.owner,
+    required this.image,
+    required this.busNumber,
+  }) : super(key: key);
 
   @override
   State<viewBusDetails> createState() => _viewBusDetailsState();
@@ -43,7 +49,9 @@ class _viewBusDetailsState extends State<viewBusDetails> {
             right: 0,
             child: FadeAnimation(
               1.2,
-              Image.network('${murl}choices/image/${widget.image}'),
+              appImageNetwork(
+                endPoint: 'bus/images/${widget.image}',
+              ),
             ),
           ),
           Positioned(
@@ -52,13 +60,13 @@ class _viewBusDetailsState extends State<viewBusDetails> {
             child: FadeAnimation(
               1.2,
               CircleAvatar(
-                backgroundColor: HexColor('#981EE4'),
+                backgroundColor: AppConst.primary,
                 child: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   icon: const Icon(
-                    Icons.arrow_back_ios,
+                    Icons.arrow_back,
                     color: Colors.white,
                   ),
                 ),
@@ -75,8 +83,8 @@ class _viewBusDetailsState extends State<viewBusDetails> {
               Container(
                 padding: EdgeInsets.all(25),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: HexColor('#000000')),
+                  color: AppConst.black,
+                  border: Border.all(color: AppConst.primary),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25),
@@ -90,8 +98,8 @@ class _viewBusDetailsState extends State<viewBusDetails> {
                         1.3,
                         Center(
                           child: AppText(
-                            txt: '${widget.driver}',
-                            color: HexColor('#000000'),
+                            txt: '${widget.busNumber}',
+                            color: AppConst.white,
                             size: 18,
                             weight: FontWeight.w700,
                           ),
@@ -101,23 +109,22 @@ class _viewBusDetailsState extends State<viewBusDetails> {
                         height: 15,
                       ),
                       Divider(
-                        color: HexColor('#981EE4'),
+                        color: AppConst.primary,
                       ),
                       FadeAnimation(
                         1.3,
                         Row(
                           children: [
                             CircleAvatar(
-                              backgroundColor: HexColor('#981EE4'),
-                              child: Icon(Icons.calendar_month,
-                                  color: HexColor('#ffffff')),
+                              backgroundColor: AppConst.primary,
+                              child: Icon(Icons.person, color: AppConst.white),
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             AppText(
-                              txt: 'Date -${widget.conductor}',
-                              color: HexColor('#000000'),
+                              txt: 'Bus Owner - ${widget.owner}',
+                              color: AppConst.white,
                               size: 15,
                               weight: FontWeight.w700,
                             ),
@@ -132,15 +139,62 @@ class _viewBusDetailsState extends State<viewBusDetails> {
                         Row(
                           children: [
                             CircleAvatar(
-                                backgroundColor: HexColor('#981EE4'),
-                                child: Icon(Icons.person,
-                                    color: HexColor('#ffffff'))),
+                              backgroundColor: AppConst.primary,
+                              child: Icon(Icons.drive_eta_rounded,
+                                  color: AppConst.white),
+                            ),
                             SizedBox(
                               width: 10,
                             ),
                             AppText(
-                              txt: 'Author -${widget.number_of_seat}',
-                              color: HexColor('#000000'),
+                              txt: 'Bus Driver - ${widget.driver}',
+                              color: AppConst.white,
+                              size: 15,
+                              weight: FontWeight.w700,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FadeAnimation(
+                        1.3,
+                        Row(
+                          children: [
+                            CircleAvatar(
+                                backgroundColor: AppConst.primary,
+                                child: Icon(Icons.assignment_ind,
+                                    color: AppConst.white)),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            AppText(
+                              txt: 'Bus Conductor - ${widget.conductor}',
+                              color: AppConst.white,
+                              size: 15,
+                              weight: FontWeight.w700,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      FadeAnimation(
+                        1.3,
+                        Row(
+                          children: [
+                            CircleAvatar(
+                                backgroundColor: AppConst.primary,
+                                child: Icon(Icons.bus_alert_rounded,
+                                    color: AppConst.white)),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            AppText(
+                              txt: 'Bus type - ${widget.bus_type}',
+                              color: AppConst.white,
                               size: 15,
                               weight: FontWeight.w700,
                             ),
@@ -151,55 +205,7 @@ class _viewBusDetailsState extends State<viewBusDetails> {
                         height: 20,
                       ),
                       Divider(
-                        color: HexColor('#981EE4'),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      AppText(
-                        txt: 'Caption',
-                        color: HexColor('#981EE4'),
-                        size: 18,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(15.0),
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)),
-                        child: Center(
-                          child: FadeAnimation(
-                            1.3,
-                            AppText(
-                              txt: '${widget.owner}',
-                              color: HexColor('#000000'),
-                              size: 18,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      AppText(
-                        txt: 'Description',
-                        color: HexColor('#981EE4'),
-                        size: 18,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(15.0),
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)),
-                        child: FadeAnimation(
-                          1.4,
-                          AppText(
-                            txt: '${widget.bus_type}',
-                            color: HexColor('#000000'),
-                            weight: FontWeight.w700,
-                            size: 18,
-                          ),
-                        ),
+                        color: AppConst.primary,
                       ),
                       Align(
                         alignment: Alignment.center,
@@ -207,13 +213,13 @@ class _viewBusDetailsState extends State<viewBusDetails> {
                           width: 300,
                           height: 50,
                           child: AppButton(
-                              onPress: () => null,
-                              label:  'Provide feedback',
-                              bcolor: AppConst.primary, borderRadius: 20, textColor: AppConst.white,),
+                            onPress: () => Navigator.pushNamed(context, RouteNames.bookBus, arguments: { 'id': widget.id}),
+                            label: 'Book Bus',
+                            bcolor: AppConst.primary,
+                            borderRadius: 20,
+                            textColor: AppConst.white,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
                       ),
                     ],
                   ),

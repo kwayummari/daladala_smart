@@ -1,5 +1,6 @@
 import 'package:daladala_smart/src/screens/introduction/intro.dart';
 import 'package:daladala_smart/src/screens/models/client/bottomNavigationBar/bottomNavigationBar.dart';
+import 'package:daladala_smart/src/screens/models/client/buses/bookBus.dart';
 import 'package:daladala_smart/src/screens/models/client/buses/buses.dart';
 import 'package:daladala_smart/src/screens/models/client/buses/exploreBuses.dart';
 import 'package:daladala_smart/src/screens/models/client/dashboard/dashboard.dart';
@@ -48,6 +49,14 @@ RouteNames.buses: (context) {
     final Map<String, dynamic>? args =
     ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     return exploreBuses(
+      id: args?['id'],
+      busNumber: args?['busNumber'],
+    );
+  },
+  RouteNames.bookBus: (context) {
+    final Map<String, dynamic>? args =
+    ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    return bookBus(
       id: args?['id'],
     );
   },
