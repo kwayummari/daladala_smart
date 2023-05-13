@@ -1,10 +1,12 @@
 // ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables, non_constant_identifier_names, duplicate_ignore, prefer_const_constructors, body_might_complete_normally_nullable, prefer_if_null_operators, no_leading_underscores_for_local_identifiers, unused_element, avoid_print, unused_label
 
+import 'package:daladala_smart/src/service/busHours-service.dart';
 import 'package:daladala_smart/src/utils/animations/fadeanimation.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:daladala_smart/src/widgets/app-image-network.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
+import 'package:daladala_smart/src/widgets/app_listview_builder.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -37,9 +39,27 @@ class viewBusDetails extends StatefulWidget {
 
 class _viewBusDetailsState extends State<viewBusDetails> {
   @override
+  void initState() {
+    super.initState();
+    getBusesHours();
+  }
+
+  List hours = [];
+
+  Future<List> getBusesHours() async {
+    final busHoursService _busesHoursService = await busHoursService();
+    final List busesHoursList =
+        await _busesHoursService.getBusHours(context, widget.id);
+    setState(() {
+      hours = busesHoursList;
+    });
+    print(hours);
+    return busesHoursList;
+  }
+
+  @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
-
     return Scaffold(
       body: Stack(
         children: [
@@ -207,13 +227,38 @@ class _viewBusDetailsState extends State<viewBusDetails> {
                       Divider(
                         color: AppConst.primary,
                       ),
+                      if (hours.isNotEmpty)
+                        AppText(
+                          txt: 'Working Hours',
+                          size: 15,
+                          color: AppConst.white,
+                          weight: FontWeight.w900,
+                        ),
+                      if (hours.isNotEmpty)
+                        AppListviewBuilder(
+                            itemnumber: hours.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: AppText(
+                                  txt: hours[index]['timeline'],
+                                  size: 15,
+                                  color: AppConst.white,
+                                ),
+                              );
+                            }),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Align(
                         alignment: Alignment.center,
                         child: Container(
                           width: 300,
                           height: 50,
                           child: AppButton(
-                            onPress: () => Navigator.pushNamed(context, RouteNames.bookBus, arguments: { 'id': widget.id}),
+                            onPress: () => Navigator.pushNamed(
+                                context, RouteNames.bookBus,
+                                arguments: {'id': widget.id}),
                             label: 'Book Bus',
                             bcolor: AppConst.primary,
                             borderRadius: 20,
