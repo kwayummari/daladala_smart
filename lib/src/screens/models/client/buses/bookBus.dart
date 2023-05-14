@@ -20,7 +20,7 @@ class bookBus extends StatefulWidget {
 
 class _bookBusState extends State<bookBus> {
   var datePickup = DateTime.now();
-  var timePickup = TimeOfDay.now();
+  var timePickup = TimeOfDay.now().toString();
   var paymentType;
   var seats;
 
@@ -133,9 +133,8 @@ class _bookBusState extends State<bookBus> {
                 textColor: AppConst.black,
                 title: 'Select a pickup time',
                 onTimeSelected: (time) {
-                  print(time);
                   setState(() {
-                    timePickup = time;
+                    timePickup = '${time.hour}:${time.minute}';
                   });
                 }),
             SizedBox(

@@ -29,7 +29,7 @@ class _CustomizableTimePickerState extends State<CustomizableTimePicker> {
   void initState() {
     super.initState();
     _selectedTime = TimeOfDay.now();
-    _timeFormat = DateFormat('h:mm a');
+    _timeFormat = DateFormat('HH:mm');
   }
   void _selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
