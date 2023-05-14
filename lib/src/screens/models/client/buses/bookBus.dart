@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/service/booking-service.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_datePicker.dart';
@@ -7,17 +8,37 @@ import 'package:flutter/material.dart';
 
 class bookBus extends StatefulWidget {
   var id;
-
-  bookBus({Key? key, required this.id}) : super(key: key);
+  var seats;
+  bookBus({Key? key, required this.id, required this.seats}) : super(key: key);
 
   @override
   State<bookBus> createState() => _bookBusState();
 }
 
 class _bookBusState extends State<bookBus> {
-  var datePickup;
-  var timePickup;
-
+  var datePickup = DateTime.now();
+  var timePickup = TimeOfDay.now();
+  @override
+  void initState() {
+    super.initState();
+    getBusesHours();
+  }
+  var numbers;
+  bool isBookable = false;
+  Future<String> getBusesHours() async {
+    final bookingService _bookingService = await bookingService();
+     var bookingnumbers =
+    await _bookingService.getbookings(context, datePickup.toString(), timePickup.toString());
+     int seatsLeft = int.parse(widget.seats) - int.parse(bookingnumbers.toString());
+     if(seatsLeft > 0) {
+       setState(() {
+         isBookable = true;
+       });
+     } else {
+       isBookable = false;
+     }
+    return bookingnumbers.toString();
+  }
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
@@ -69,6 +90,7 @@ class _bookBusState extends State<bookBus> {
             CustomizableDatePicker(
               title: 'Select a pickup date',
               onDateSelected: (date) {
+                print(date);
                 setState(() {
                   datePickup = date;
                 });
@@ -100,10 +122,22 @@ class _bookBusState extends State<bookBus> {
                 textColor: AppConst.black,
                 title: 'Select a pickup time',
                 onTimeSelected: (time) {
+                  print(time);
                   setState(() {
                     timePickup = time;
                   });
-                })
+                }),
+            SizedBox(height: 20,),
+            if(isBookable)
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    txt: 'Select payment type',
+                    size: 15,
+                    color: AppConst.white,
+                  )),
+            if(isBookable)
+              App
           ],
         ),
         isvisible: false,

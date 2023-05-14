@@ -53,7 +53,6 @@ class _viewBusDetailsState extends State<viewBusDetails> {
     setState(() {
       hours = busesHoursList;
     });
-    print(hours);
     return busesHoursList;
   }
 
@@ -258,7 +257,7 @@ class _viewBusDetailsState extends State<viewBusDetails> {
                           child: AppButton(
                             onPress: () => Navigator.pushNamed(
                                 context, RouteNames.bookBus,
-                                arguments: {'id': widget.id}),
+                                arguments: {'id': widget.id, 'seats': widget.number_of_seat}),
                             label: 'Book Bus',
                             bcolor: AppConst.primary,
                             borderRadius: 20,

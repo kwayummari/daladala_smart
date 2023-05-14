@@ -58,6 +58,7 @@ RouteNames.buses: (context) {
     ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     return bookBus(
       id: args?['id'],
+      seats: args?['seats'],
     );
   },
 };
