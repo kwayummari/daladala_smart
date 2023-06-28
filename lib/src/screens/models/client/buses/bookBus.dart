@@ -1,11 +1,11 @@
 import 'package:daladala_smart/src/service/booking-service.dart';
+import 'package:daladala_smart/src/service/busHours-service.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app-offlineDropdownFormField.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_datePicker.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
-import 'package:daladala_smart/src/widgets/app_timePicker.dart';
 import 'package:flutter/material.dart';
 
 class bookBus extends StatefulWidget {
@@ -27,13 +27,14 @@ class _bookBusState extends State<bookBus> {
   @override
   void initState() {
     super.initState();
+    getBusesSeats();
     getBusesHours();
   }
 
   var numbers;
   bool isBookable = false;
   List<int> numberList = [];
-  Future<String> getBusesHours() async {
+  Future<String> getBusesSeats() async {
     final bookingService _bookingService = await bookingService();
     var bookingNumbers = await _bookingService.getbookings(context,
         datePickup.toString(), timePickup.toString(), widget.id.toString());
@@ -49,6 +50,19 @@ class _bookBusState extends State<bookBus> {
       isBookable = false;
     }
     return bookingNumbers.toString();
+  }
+
+  List hours = [];
+
+  Future<List> getBusesHours() async {
+    final busHoursService _busesHoursService = await busHoursService();
+    final List busesHoursList =
+        await _busesHoursService.getBusHours(context, widget.id);
+    setState(() {
+      hours = busesHoursList;
+    });
+    print(hours);
+    return busesHoursList;
   }
 
   @override
@@ -129,7 +143,7 @@ class _bookBusState extends State<bookBus> {
             AppDropdownTextFormField(
                 labelText: 'Select Timeline',
                 options: numberList,
-                value: seats,
+                value: hours[index]['timeline'],
                 onChanged: (newValue) {
                   setState(() {
                     timePickup = newValue;
