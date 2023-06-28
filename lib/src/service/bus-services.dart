@@ -22,9 +22,16 @@ class busService {
     Map<String, dynamic> data = {
       'id': id.toString(),
     };
-    print(id);
     final response = await api.post(context, 'bookings/get_by_id.php', data);
-    print(response);
+    return response;
+  }
+  Future getBusByDriverId(BuildContext context) async {
+    final SplashFunction _splashService = await SplashFunction();
+    final String id = await _splashService.getId();
+    Map<String, dynamic> data = {
+      'id': id.toString(),
+    };
+    final response = await api.post(context, 'bookings/get_by_driver_id.php', data);
     return response;
   }
 }

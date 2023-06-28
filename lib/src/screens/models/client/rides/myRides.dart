@@ -22,7 +22,7 @@ class _myRidesState extends State<myRides> {
   List details = [];
   Future<List> getBuses() async {
     final busService _busesService = await busService();
-    final List busesList = await _busesService.getBusById(context);
+    final List busesList = await _busesService.getBusByDriverId(context);
     setState(() {
       details = busesList;
     });
