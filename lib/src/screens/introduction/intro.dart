@@ -1,8 +1,6 @@
-import 'package:daladala_smart/src/functions/slide.dart';
 import 'package:daladala_smart/src/screens/introduction/slides.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:intro_slider/intro_slider.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -21,19 +19,25 @@ class _IntroScreenState extends State<IntroScreen> {
       backgroundColor: AppConst.primary,
       centerText:
           'Offers a convenient way to plan your commute and get around town.',
+      image: 'assets/intro1.png',
+      width: 400,
     ),
     Slide(
       title: "Let\'s Travel",
       description: "Move Purposefully!",
       backgroundColor: AppConst.primary,
+      image: 'assets/intro4.png',
       centerText:
           'Rely on daladala smart up-to-date schedules and real-time information about your bus route.',
+      width: 400,
     ),
     Slide(
       title: "Let\'s Travel",
       description: "Move Purposefully!",
       backgroundColor: AppConst.primary,
+      image: 'assets/intro3.png',
       centerText: 'Save money on transportation costs with the daladala app',
+      width: 300,
     ),
   ];
   Color activeColor = const Color(0xFF00967B);

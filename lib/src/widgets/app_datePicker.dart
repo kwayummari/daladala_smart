@@ -32,9 +32,11 @@ class _CustomizableDatePickerState extends State<CustomizableDatePicker> {
   @override
   void initState() {
     super.initState();
-    _selectedDate = DateTime.now();
-    _dateFormat = DateFormat('EEEE, MMMM d, y');
+    _selectedDate = DateTime.now().toLocal();
+    _selectedDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
+    _dateFormat = DateFormat('dd/MM/yyyy');
   }
+
 
   void _selectDate(BuildContext context) async {
     final now = DateTime.now();

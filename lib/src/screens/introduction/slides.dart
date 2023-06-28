@@ -9,9 +9,13 @@ class Slide extends StatelessWidget {
   final String description;
   final Color backgroundColor;
   final String? centerText;
+  final String image;
+  final double width;
 
   Slide({
     Key? key,
+    required this.width,
+    required this.image,
     required this.title,
     required this.description,
     required this.backgroundColor,
@@ -38,10 +42,12 @@ class Slide extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
               ),
-              Image.asset(
-                'assets/icon.png',
-                height: 150,
-                width: 150,
+              Padding(
+                padding: const EdgeInsets.only(left: 50),
+                child: Image.asset(
+                  image,
+                  width: width,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

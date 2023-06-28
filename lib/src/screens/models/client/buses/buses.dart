@@ -62,6 +62,15 @@ class _busesState extends State<buses> {
           ),
           onPressed: () => Navigator.pushNamed(context, RouteNames.navigation),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.home,
+              color: AppConst.white,
+            ),
+            onPressed: () => Navigator.pushNamed(context, RouteNames.bottomNavigationBar),
+          )
+        ],
         backgroundColor: AppConst.primary,
         title: AppText(
           txt: 'Available Buses',

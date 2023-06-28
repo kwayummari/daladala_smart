@@ -1,9 +1,11 @@
 import 'package:daladala_smart/src/functions/splash.dart';
 import 'package:daladala_smart/src/service/profile-service.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class profile extends StatefulWidget {
   const profile({super.key});
@@ -156,34 +158,43 @@ class _profileState extends State<profile> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 70,
-                    width: 100,
-                    margin: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: AppConst.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      border: Border.all(
+                  GestureDetector(
+                    onTap: () async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.clear();
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, RouteNames.login, (_) => false);
+                    },
+                    child: Container(
+                      height: 70,
+                      width: 100,
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
                         color: AppConst.white,
-                        width: 2.0,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        border: Border.all(
+                          color: AppConst.white,
+                          width: 2.0,
+                        ),
                       ),
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Icon(
-                          Icons.logout,
-                          size: 30,
-                          color: AppConst.primary,
-                        ),
-                        AppText(
-                          txt: 'Sign Out',
-                          size: 15,
-                          color: AppConst.black,
-                        )
-                      ],
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Icon(
+                            Icons.logout,
+                            size: 30,
+                            color: AppConst.primary,
+                          ),
+                          AppText(
+                            txt: 'Sign Out',
+                            size: 15,
+                            color: AppConst.black,
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
