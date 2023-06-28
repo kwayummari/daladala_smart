@@ -109,6 +109,58 @@ class _busCardState extends State<busCard> {
                 ],
               ),
             ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  richText(
+                    header: 'Conductor\'s Name: ',
+                    trailer: '${widget.conductorName}',
+                  )
+                ],
+              ),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  richText(
+                    header: 'Bus Owner: ',
+                    trailer: '${widget.driverName}',
+                  )
+                ],
+              ),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  richText(
+                    header: 'Number of Seats: ',
+                    trailer: '${widget.numberOfSeats}',
+                  )
+                ],
+              ),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  richText(
+                    header: 'Bus Type: ',
+                    trailer: '${widget.busType}',
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
