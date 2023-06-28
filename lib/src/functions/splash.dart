@@ -20,7 +20,7 @@ class SplashFunction {
         Navigator.pushNamed(context, RouteNames.login);
       } else if (email.toString() != null && role.toString() == '0') {
         Navigator.pushNamed(context, RouteNames.bottomNavigationBar);
-      } else {
+      } else if (email.toString() != null && role.toString() == '1'){
         Navigator.pushNamed(context, RouteNames.login);
       }
     }

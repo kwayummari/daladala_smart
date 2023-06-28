@@ -49,7 +49,7 @@ class loginService {
           response: 'Welcome back',
         ).show(context);
         Navigator.pushNamedAndRemoveUntil(
-            context, RouteNames.b, (_) => false);
+            context, RouteNames.bottomNavigationBarDriver, (_) => false);
       }
     } else {
       Provider.of<MyProvider>(context, listen: false)
