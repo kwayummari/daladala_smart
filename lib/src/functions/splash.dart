@@ -21,7 +21,7 @@ class SplashFunction {
       } else if (email.toString() != null && role.toString() == '0') {
         Navigator.pushNamed(context, RouteNames.bottomNavigationBar);
       } else if (email.toString() != null && role.toString() == '1'){
-        Navigator.pushNamed(context, RouteNames.login);
+        Navigator.pushNamed(context, RouteNames.bottomNavigationBarDriver);
       }
     }
   }
