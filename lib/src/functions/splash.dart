@@ -33,7 +33,7 @@ class SplashFunction {
     var i = sharedPreferences.getString('id');
     var r = sharedPreferences.getString('role');
     var intr = sharedPreferences.getString('intro');
-    email = email;
+    email = e;
     id = i;
     role = r;
     intro = intr;
