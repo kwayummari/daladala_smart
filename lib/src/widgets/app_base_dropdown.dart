@@ -1,6 +1,6 @@
+import 'package:daladala_smart/src/widgets/app_rich_text.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:wgnrr/utils/widget/richtext/richtext.dart';
 
 class PatientResultsCard extends StatefulWidget {
   final String client;

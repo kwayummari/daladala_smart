@@ -1,4 +1,3 @@
-import 'package:daladala_smart/src/widgets/app_base_dropdown.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +14,7 @@ class _myRidesState extends State<myRides> {
     return AppBaseScreen(
         child: Column(
           children: [
-            DropdownWidget(
-              title: 'Select an option',
-              items: ['Option 1', 'Option 2', 'Option 3'],
-            ),
+            
           ],
         ),
         isvisible: false,
