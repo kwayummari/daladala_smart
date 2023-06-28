@@ -20,7 +20,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final loginService _apiService = loginService();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   bool marked = false;

@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class AppSnackbar extends SnackBar {
     required this.response,
     required this.isError,
   }) : super(
-          backgroundColor: isError == false ? Colors.green : Colors.red,
+          backgroundColor: isError == false ? AppConst.primary : Colors.red,
           content: Center(
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),
