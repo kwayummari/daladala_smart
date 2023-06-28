@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_image_network.dart';
 import 'package:daladala_smart/src/widgets/app_rich_text.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
@@ -42,7 +43,7 @@ class _busCardState extends State<busCard> {
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppConst.primary,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -65,8 +66,10 @@ class _busCardState extends State<busCard> {
                   txt: 'Bus Number: ${widget.busNumber}',
                   size: 20,
                   weight: FontWeight.bold,
+                  color: AppConst.white,
                 ),
                 IconButton(
+                  color: AppConst.white,
                   icon: isExpanded
                       ? const Icon(Icons.keyboard_arrow_up)
                       : const Icon(Icons.keyboard_arrow_down),
@@ -82,6 +85,7 @@ class _busCardState extends State<busCard> {
               txt: 'Date: ${widget.date}',
               size: 15,
               weight: FontWeight.bold,
+              color: AppConst.white,
             ),
             AnimatedOpacity(
               duration: const Duration(milliseconds: 500),
