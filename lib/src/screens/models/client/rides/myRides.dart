@@ -17,21 +17,29 @@ class _myRidesState extends State<myRides> {
     super.initState();
     _futureBusList = getBuses();
   }
-
+  List details = [];
   Future<List> getBuses() async {
     final busService _busesService = await busService();
     final List busesList = await _busesService.getBusById(
         context);
+        setState(() {
+          details = busesList;
+        });
     return busesList;
   }
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
-        child: Column(
-          children: [
-            
-          ],
-        ),
+        child: details.isEmpty
+                ? Container()
+                : ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return;
+                    },
+                    itemCount: details.length != 0 ? details.length : null,
+                  ),
         isvisible: false,
         backgroundImage: false,
         backgroundAuth: false);
