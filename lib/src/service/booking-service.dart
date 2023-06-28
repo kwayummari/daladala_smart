@@ -26,9 +26,9 @@ class bookingService {
       'user_id': user_id.toString(),
       'date': date.toString(),
       'time': time.toString(),
-      'payment_type': paymentType.toString(),
       'seats': seats.toString(),
     };
+    print(data);
     final response = await api.post(context, 'bookings/post_book.php', data);
     if (response == 'Successfully booked enjoy your trip') {
       AppSnackbar(

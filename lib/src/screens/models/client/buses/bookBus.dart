@@ -6,6 +6,7 @@ import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_button.dart';
 import 'package:daladala_smart/src/widgets/app_datePicker.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
+import 'package:daladala_smart/src/widgets/app_time_dropdown.dart';
 import 'package:flutter/material.dart';
 
 class bookBus extends StatefulWidget {
@@ -20,7 +21,7 @@ class bookBus extends StatefulWidget {
 
 class _bookBusState extends State<bookBus> {
   var datePickup = DateTime.now();
-  var timePickup = TimeOfDay.now().toString();
+  var timePickup;
   var paymentType;
   var seats;
 
@@ -61,7 +62,6 @@ class _bookBusState extends State<bookBus> {
     setState(() {
       hours = busesHoursList;
     });
-    print(hours);
     return busesHoursList;
   }
 
@@ -140,16 +140,15 @@ class _bookBusState extends State<bookBus> {
             SizedBox(
               height: 10,
             ),
-            AppDropdownTextFormField(
-                labelText: 'Select Timeline',
-                options: numberList,
-                value: hours[index]['timeline'],
-                onChanged: (newValue) {
-                  setState(() {
-                    timePickup = newValue;
-                  });
-                },
-              ),
+            AppDropdownTimeTextFormField(
+              labelText: 'Select Timeline',
+              options: hours,
+              selectedTimeline: timePickup,
+              onChanged: (String? newValue) {
+                timePickup = newValue;
+                // Handle the changed timeline here
+              },
+            ),
             SizedBox(
               height: 20,
             ),

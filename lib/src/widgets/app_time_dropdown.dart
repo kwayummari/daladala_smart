@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AppDropdownTimeTextFormField extends StatelessWidget {
   final String labelText;
-  final List<Map<String, dynamic>> options;
+  final List options;
   final String? selectedTimeline;
   final void Function(String?)? onChanged;
 
