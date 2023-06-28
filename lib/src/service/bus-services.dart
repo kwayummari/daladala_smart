@@ -22,7 +22,7 @@ class busService {
     Map<String, dynamic> data = {
       'id': id.toString(),
     };
-    final response = await api.post(context, 'bus/get.php', data);
+    final response = await api.post(context, 'bus/get_by_id.php', data);
     return response;
   }
 }
