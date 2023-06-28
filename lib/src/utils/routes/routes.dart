@@ -25,6 +25,7 @@ final Map<String, WidgetBuilder> routes = {
   RouteNames.rides:(context) => rides(),
   RouteNames.profile:(context) => profile(),
   RouteNames.bottomNavigationBar:(context) => bottomNavigation(),
+  RouteNames.bottomNavigationBarDriver:(context) => bottomNavigation(),
   RouteNames.navigation:(context) => navigation(),
   RouteNames.pricing:(context) => pricing(),
   RouteNames.searchBus: (context) {

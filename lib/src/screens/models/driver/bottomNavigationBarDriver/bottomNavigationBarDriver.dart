@@ -4,14 +4,14 @@ import 'package:daladala_smart/src/screens/models/driver/rides/rides.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:flutter/material.dart';
 
-class bottomNavigation extends StatefulWidget {
-  const bottomNavigation({Key? key}) : super(key: key);
+class bottomNavigationDriver extends StatefulWidget {
+  const bottomNavigationDriver({Key? key}) : super(key: key);
 
   @override
-  _bottomNavigationState createState() => _bottomNavigationState();
+  _bottomNavigationDriverState createState() => _bottomNavigationDriverState();
 }
 
-class _bottomNavigationState extends State<bottomNavigation> {
+class _bottomNavigationDriverState extends State<bottomNavigationDriver> {
   int index = 1;
   final Screen = [
     rides(),
