@@ -8,6 +8,7 @@ import 'package:daladala_smart/src/widgets/app_datePicker.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:daladala_smart/src/widgets/app_time_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class bookBus extends StatefulWidget {
   var id;
@@ -20,7 +21,7 @@ class bookBus extends StatefulWidget {
 }
 
 class _bookBusState extends State<bookBus> {
-  var datePickup = DateTime.now();
+  var datePickup = DateFormat('dd/MM/yyyy').format(DateTime.now());
   var timePickup;
   var paymentType;
   var seats;
@@ -37,8 +38,8 @@ class _bookBusState extends State<bookBus> {
   List<int> numberList = [];
   Future<String> getBusesSeats() async {
     final bookingService _bookingService = await bookingService();
-    var bookingNumbers = await _bookingService.getbookings(context,
-        datePickup.toString(), timePickup.toString(), widget.id.toString());
+    var bookingNumbers = await _bookingService.getbookings(
+        context, datePickup.toString(), widget.id.toString());
     int seatsLeft =
         int.parse(widget.seats) - int.parse(bookingNumbers.toString());
     if (seatsLeft > 0) {
@@ -116,10 +117,11 @@ class _bookBusState extends State<bookBus> {
             CustomizableDatePicker(
               title: 'Select a pickup date',
               onDateSelected: (date) {
-                print(date);
                 setState(() {
-                  datePickup = date;
+                  datePickup = date.toString();
                 });
+                getBusesSeats();
+                getBusesHours();
               },
               backgroundColor: AppConst.white,
               buttonColor: AppConst.primary,
@@ -145,8 +147,9 @@ class _bookBusState extends State<bookBus> {
               options: hours,
               selectedTimeline: timePickup,
               onChanged: (String? newValue) {
-                timePickup = newValue;
-                // Handle the changed timeline here
+                setState(() {
+                  timePickup = newValue;
+                });
               },
             ),
             SizedBox(
@@ -174,6 +177,12 @@ class _bookBusState extends State<bookBus> {
                     seats = newValue;
                   });
                 },
+              ),
+            if (!isBookable)
+              AppText(
+                txt: 'SORRY ALL SEATS ARE FILLED IN THAT DATE AND TIME',
+                size: 15,
+                color: AppConst.white,
               ),
             if (isBookable)
               Container(

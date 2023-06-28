@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 class CustomizableDatePicker extends StatefulWidget {
   final String title;
-  final Function(DateTime) onDateSelected;
+  final Function(String) onDateSelected;
   final Color backgroundColor;
   final Color buttonColor;
   final Color selectedColor;
@@ -33,10 +33,10 @@ class _CustomizableDatePickerState extends State<CustomizableDatePicker> {
   void initState() {
     super.initState();
     _selectedDate = DateTime.now().toLocal();
-    _selectedDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
-    _dateFormat = DateFormat('dd/MM/yyyy');
+    _selectedDate =
+        DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
+    _dateFormat = DateFormat('yyyy-MM-dd');
   }
-
 
   void _selectDate(BuildContext context) async {
     final now = DateTime.now();
@@ -49,12 +49,11 @@ class _CustomizableDatePickerState extends State<CustomizableDatePicker> {
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
-        widget.onDateSelected(picked);
+        String formattedDate = _dateFormat.format(_selectedDate);
+        widget.onDateSelected(formattedDate);
       });
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {

@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 class bookingService {
   Api api = Api();
 
-  Future getbookings(
-      BuildContext context, String date, String time, String bus_id) async {
+  Future getbookings(BuildContext context, String date, String bus_id) async {
     Map<String, dynamic> data = {
       'date': date.toString(),
-      'time': time.toString(),
       'bus_id': bus_id.toString(),
     };
+    print(data);
     final response = await api.post(context, 'bookings/get_number.php', data);
     return response;
   }
@@ -28,13 +27,13 @@ class bookingService {
       'time': time.toString(),
       'seats': seats.toString(),
     };
-    print(data);
     final response = await api.post(context, 'bookings/post_book.php', data);
     if (response == 'Successfully booked enjoy your trip') {
       AppSnackbar(
         isError: false,
         response: response,
       ).show(context);
+      Navigator.of(context).pop();
     } else {
       AppSnackbar(
         isError: true,
