@@ -11,6 +11,7 @@ class busCard extends StatefulWidget {
   final String busType;
   final String busOwner;
   final String time;
+  final String date;
   final String image;
 
   const busCard({
@@ -21,6 +22,7 @@ class busCard extends StatefulWidget {
     required this.busType,
     required this.busOwner,
     required this.time,
+    required this.date,
     required this.image,
   });
 
@@ -33,121 +35,83 @@ class _busCardState extends State<busCard> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.image == 'image - Medical'
-        ? AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-            height: isExpanded ? 250 : 70,
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 2,
-                  offset: const Offset(0, 3),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+      height: isExpanded ? 220 : 60,
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: const Offset(0, 3),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                appNetworkImage(endPoint: 'bus/images/${widget.image}'),
+                AppText(
+                  txt: 'Bus Number: ${widget.busNumber}',
+                  size: 20,
+                  weight: FontWeight.bold,
+                ),
+                IconButton(
+                  icon: isExpanded
+                      ? const Icon(Icons.keyboard_arrow_up)
+                      : const Icon(Icons.keyboard_arrow_down),
+                  onPressed: () {
+                    setState(() {
+                      isExpanded = !isExpanded;
+                    });
+                  },
                 ),
               ],
-              borderRadius: BorderRadius.circular(10),
             ),
-            child: SingleChildScrollView(
+            AppText(
+              txt: 'Date: ${widget.date}',
+              size: 15,
+              weight: FontWeight.bold,
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      appNetworkImage(endPoint: 'bus/images/${widget.image}'),
-                      IconButton(
-                        icon: isExpanded
-                            ? const Icon(Icons.keyboard_arrow_up)
-                            : const Icon(Icons.keyboard_arrow_down),
-                        onPressed: () {
-                          setState(() {
-                            isExpanded = !isExpanded;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 500),
-                    opacity: isExpanded ? 1.0 : 0.0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        richText(
-                          header: 'Plate Number: ',
-                          trailer: '${widget.busNumber}',
-                        )
-                      ],
-                    ),
-                  ),
+                  richText(
+                    header: 'Bus Driver: ',
+                    trailer: '${widget.driverName}',
+                  )
                 ],
               ),
             ),
-          )
-        : AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-            height: isExpanded ? 220 : 60,
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 2,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: SingleChildScrollView(
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppText(
-                        txt: 'Owner: ${widget.busOwner}',
-                        size: 20,
-                        weight: FontWeight.bold,
-                      ),
-                      IconButton(
-                        icon: isExpanded
-                            ? const Icon(Icons.keyboard_arrow_up)
-                            : const Icon(Icons.keyboard_arrow_down),
-                        onPressed: () {
-                          setState(() {
-                            isExpanded = !isExpanded;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 500),
-                    opacity: isExpanded ? 1.0 : 0.0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        richText(
-                          header: 'Bus Driver: ',
-                          trailer:
-                              '${widget.driverName}',
-                        )
-                      ],
-                    ),
-                  ),
+                  richText(
+                    header: 'Driver\'s Name: ',
+                    trailer: '${widget.driverName}',
+                  )
                 ],
               ),
             ),
-          );
+          ],
+        ),
+      ),
+    );
   }
 }

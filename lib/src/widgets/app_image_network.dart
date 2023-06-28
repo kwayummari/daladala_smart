@@ -8,7 +8,7 @@ class appNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: 50,
+      radius: 20,
       backgroundImage:
           NetworkImage('${baseUrl}/${endPoint}'), // Replace with your image URL
     );

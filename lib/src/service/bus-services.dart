@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class busService {
   Api api = Api();
 
-  Future getBus(
-      BuildContext context, String destination, String direction, String route) async {
+  Future getBus(BuildContext context, String destination, String direction,
+      String route) async {
     Map<String, dynamic> data = {
       'destination': destination.toString(),
       'direction': direction.toString(),
@@ -15,14 +15,16 @@ class busService {
     final response = await api.post(context, 'bus/get.php', data);
     return response;
   }
-  Future getBusById(
-      BuildContext context) async {
-        final SplashFunction _splashService = await SplashFunction();
+
+  Future getBusById(BuildContext context) async {
+    final SplashFunction _splashService = await SplashFunction();
     final String id = await _splashService.getId();
     Map<String, dynamic> data = {
       'id': id.toString(),
     };
-    final response = await api.post(context, 'bus/get_by_id.php', data);
+    print(id);
+    final response = await api.post(context, 'bookings/get_by_id.php', data);
+    print(response);
     return response;
   }
 }
