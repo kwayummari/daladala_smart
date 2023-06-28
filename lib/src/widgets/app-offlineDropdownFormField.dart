@@ -2,11 +2,11 @@ import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
-class AppDropdownTextFormField extends StatelessWidget {
+class AppDropdownTextFormField<T> extends StatelessWidget {
   final String labelText;
-  final List<String> options;
-  final String value;
-  final void Function(String?)? onChanged;
+  final List<T> options;
+  final T value;
+  final void Function(T?)? onChanged;
 
   AppDropdownTextFormField({
     required this.labelText,
@@ -32,16 +32,16 @@ class AppDropdownTextFormField extends StatelessWidget {
           ),
         ),
         child: DropdownButtonHideUnderline(
-          child: DropdownButton<String>(
+          child: DropdownButton<T>(
             value: value,
-            hint: AppText(txt: labelText , color: AppConst.black, size: 15,),
+            hint: AppText(txt: labelText, color: AppConst.black, size: 15,),
             isDense: true,
             onChanged: onChanged,
             items: [
-              ...options.map((String option) {
-                return DropdownMenuItem<String>(
+              ...options.map((T option) {
+                return DropdownMenuItem<T>(
                   value: option,
-                  child: AppText(txt: option, size: 15, color: AppConst.black,),
+                  child: AppText(txt: option.toString(), size: 15, color: AppConst.black,),
                 );
               }).toList(),
             ],

@@ -32,22 +32,23 @@ class _bookBusState extends State<bookBus> {
 
   var numbers;
   bool isBookable = false;
-
+  List<int> numberList = [];
   Future<String> getBusesHours() async {
     final bookingService _bookingService = await bookingService();
-    var bookingnumbers = await _bookingService.getbookings(context,
+    var bookingNumbers = await _bookingService.getbookings(context,
         datePickup.toString(), timePickup.toString(), widget.id.toString());
     int seatsLeft =
-        int.parse(widget.seats) - int.parse(bookingnumbers.toString());
+        int.parse(widget.seats) - int.parse(bookingNumbers.toString());
     if (seatsLeft > 0) {
       setState(() {
         isBookable = true;
         numbers = seatsLeft;
+        numberList = List.generate(seatsLeft, (index) => index + 1);
       });
     } else {
       isBookable = false;
     }
-    return bookingnumbers.toString();
+    return bookingNumbers.toString();
   }
 
   @override
@@ -125,48 +126,19 @@ class _bookBusState extends State<bookBus> {
             SizedBox(
               height: 10,
             ),
-            CustomizableTimePicker(
-                backgroundColor: AppConst.white,
-                buttonColor: AppConst.primary,
-                selectedColor: AppConst.primary,
-                todayColor: AppConst.primary,
-                textColor: AppConst.black,
-                title: 'Select a pickup time',
-                onTimeSelected: (time) {
-                  setState(() {
-                    timePickup = '${time.hour}:${time.minute}';
-                  });
-                }),
-            SizedBox(
-              height: 20,
-            ),
-            if (isBookable)
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: AppText(
-                    txt: 'Select payment type',
-                    size: 15,
-                    color: AppConst.white,
-                  )),
-            if (isBookable)
-              SizedBox(
-                height: 10,
-              ),
-            if (isBookable)
-              AppDropdownTextFormField(
-                labelText: 'Payment type',
-                options: [
-                  '',
-                  'Cash',
-                  'Cashless',
-                ],
-                value: paymentType ?? '',
+            AppDropdownTextFormField(
+                labelText: 'Select Timeline',
+                options: numberList,
+                value: seats,
                 onChanged: (newValue) {
                   setState(() {
-                    paymentType = newValue;
+                    timePickup = newValue;
                   });
                 },
               ),
+            SizedBox(
+              height: 20,
+            ),
             if (isBookable)
               Align(
                   alignment: Alignment.centerLeft,
@@ -182,12 +154,8 @@ class _bookBusState extends State<bookBus> {
             if (isBookable)
               AppDropdownTextFormField(
                 labelText: 'Number of seats',
-                options: [
-                  '',
-                  '1',
-                  '2',
-                ],
-                value: seats ?? '',
+                options: numberList,
+                value: seats,
                 onChanged: (newValue) {
                   setState(() {
                     seats = newValue;
