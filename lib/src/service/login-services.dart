@@ -39,6 +39,17 @@ class loginService {
         ).show(context);
         Navigator.pushNamedAndRemoveUntil(
             context, RouteNames.bottomNavigationBar, (_) => false);
+      } else {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('email', email);
+        await prefs.setString('id', id.toString());
+        await prefs.setString('role', role.toString());
+        AppSnackbar(
+          isError: false,
+          response: 'Welcome back',
+        ).show(context);
+        Navigator.pushNamedAndRemoveUntil(
+            context, RouteNames.b, (_) => false);
       }
     } else {
       Provider.of<MyProvider>(context, listen: false)
