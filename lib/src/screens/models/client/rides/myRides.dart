@@ -1,5 +1,5 @@
+import 'package:daladala_smart/src/widgets/app_base_dropdown.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
-import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
 class myRides extends StatefulWidget {
@@ -12,14 +12,17 @@ class myRides extends StatefulWidget {
 class _myRidesState extends State<myRides> {
   @override
   Widget build(BuildContext context) {
-    return AppBaseScreen(child: Column(
-      children: [
-        Row(
+    return AppBaseScreen(
+        child: Column(
           children: [
-            AppText(txt: '', size: 15)
+            DropdownWidget(
+              title: 'Select an option',
+              items: ['Option 1', 'Option 2', 'Option 3'],
+            ),
           ],
-        )
-      ],
-    ), isvisible: false, backgroundImage: false, backgroundAuth: false);
+        ),
+        isvisible: false,
+        backgroundImage: false,
+        backgroundAuth: false);
   }
 }
