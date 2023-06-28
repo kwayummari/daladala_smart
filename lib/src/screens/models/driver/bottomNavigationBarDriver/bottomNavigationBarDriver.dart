@@ -12,7 +12,7 @@ class bottomNavigationDriver extends StatefulWidget {
 }
 
 class _bottomNavigationDriverState extends State<bottomNavigationDriver> {
-  int index = 1;
+  int index = 0;
   final Screen = [
     rides(),
     profile(),
