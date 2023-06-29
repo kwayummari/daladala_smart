@@ -19,7 +19,8 @@ class bookingService {
     Map<String, dynamic> data = {
       'busNumber': busNumber.toString(),
     };
-    final response = await api.post(context, 'bookings/get_live_location.php', data);
+    final response =
+        await api.post(context, 'bookings/get_live_location.php', data);
     return response;
   }
 

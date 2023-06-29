@@ -46,7 +46,7 @@ class _myRidesState extends State<myRides> {
                     time: details[index]['time'],
                     date: details[index]['date'],
                     image: details[index]['image'],
-                    isHistory: true,
+                    isHistory: false,
                   );
                 },
                 itemCount: details.length != 0 ? details.length : null,

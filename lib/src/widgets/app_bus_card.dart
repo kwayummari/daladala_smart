@@ -191,20 +191,31 @@ class _busCardState extends State<busCard> {
                 ],
               ),
             ),
-            if(widget.isHistory == false)
-            IconButton(onPressed: () => Navigator.pushNamed(context, RouteNames.liveLocation, arguments: {
-                          'busNumber': widget.busNumber.toString(),
-                        },), icon: Icon(Icons.public)),
-            if(widget.isHistory == false)
-             AnimatedOpacity(
-              duration: const Duration(milliseconds: 500),
-              opacity: isExpanded ? 1.0 : 0.0,
-              child: QrImageView(
-                data: base64.encode(utf8.encode(data)),
-                version: QrVersions.auto,
-                size: 100.0,
-              ),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (widget.isHistory == false)
+                  AnimatedOpacity(
+                    duration: const Duration(milliseconds: 500),
+                    opacity: isExpanded ? 1.0 : 0.0,
+                    child: QrImageView(
+                      data: base64.encode(utf8.encode(data)),
+                      version: QrVersions.auto,
+                      size: 100.0,
+                    ),
+                  ),
+                if (widget.isHistory == false)
+                  IconButton(
+                      onPressed: () => Navigator.pushNamed(
+                            context,
+                            RouteNames.liveLocation,
+                            arguments: {
+                              'busNumber': widget.busNumber.toString(),
+                            },
+                          ),
+                      icon: Icon(Icons.public)),
+              ],
+            )
           ],
         ),
       ),

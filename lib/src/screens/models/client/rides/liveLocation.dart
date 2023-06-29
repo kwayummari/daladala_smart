@@ -24,10 +24,9 @@ class _liveLocationState extends State<liveLocation> {
   void initState() {
     super.initState();
     getYourLocation();
-    getBusLocation();
     Timer.periodic(Duration(seconds: 5), (timer) {
-    getBusLocation();
-  });
+      getBusLocation();
+    });
   }
 
   Future getYourLocation() async {
@@ -40,9 +39,9 @@ class _liveLocationState extends State<liveLocation> {
     final bookingService _bookingService = await bookingService();
     final busLocation =
         await _bookingService.getLiveLocation(context, widget.busNumber);
-    locations = busLocation.split('-');
+    locations = busLocation[0]['live_location'].split('-');
     setState(() {
-      locations = busLocation.split('-');
+      locations = busLocation[0]['live_location'].split('-');
     });
   }
 
@@ -74,8 +73,8 @@ class _liveLocationState extends State<liveLocation> {
                     ),
                     Marker(
                       markerId: MarkerId("Bus Location"),
-                      position:
-                          LatLng(locations[0], locations[1]),
+                      position: LatLng(double.parse(locations[0]),
+                          double.parse(locations[1])),
                       icon: BitmapDescriptor.defaultMarker,
                       infoWindow: InfoWindow(
                         title: 'Bus Location',
