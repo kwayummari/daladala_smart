@@ -24,7 +24,6 @@ class _myRidesState extends State<myRides> {
     setState(() {
       details = busesList;
     });
-    print(details);
     return busesList;
   }
 

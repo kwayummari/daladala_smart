@@ -43,9 +43,15 @@ class _QRScannerPageState extends State<QRScannerPage> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      // Process the scanned QR code data
+      final busHoursService _busesHoursService = await busHoursService();
+    final List busesHoursList =
+        await _busesHoursService.getBusHours(context, widget.id);
+    setState(() {
+      hours = busesHoursList;
+    });
+    return busesHoursList;
       print('Scanned data: ${scanData.code}');
-      // Add your own logic here to handle the scanned data
+      
     });
   }
 }
