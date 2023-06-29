@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:daladala_smart/src/functions/splash.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_image_network.dart';
@@ -43,6 +45,7 @@ class _busCardState extends State<busCard> {
 
   var id;
   var email;
+  String data = '';
   Future<void> getId() async {
     final SplashFunction _splashService = await SplashFunction();
     final String ids = await _splashService.getId();
@@ -50,6 +53,7 @@ class _busCardState extends State<busCard> {
     setState(() {
       id = ids;
       email = emails;
+      data = '$id-$email-${widget.date}';
     });
   }
 
@@ -188,7 +192,7 @@ class _busCardState extends State<busCard> {
               duration: const Duration(milliseconds: 500),
               opacity: isExpanded ? 1.0 : 0.0,
               child: QrImageView(
-                data: '${id}-${email}-${widget.date}',
+                data: base64.encode(utf8.encode(data)),
                 version: QrVersions.auto,
                 size: 100.0,
               ),
