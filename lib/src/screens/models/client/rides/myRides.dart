@@ -26,6 +26,7 @@ class _myRidesState extends State<myRides> {
     setState(() {
       details = busesList;
     });
+    print(details);
     return busesList;
   }
 
@@ -40,7 +41,7 @@ class _myRidesState extends State<myRides> {
                 itemBuilder: (context, index) {
                   return busCard(
                       busNumber: details[index]['number'],
-                      driverName: details[index]['driver_name'],
+                      driverName: details[index]['driver_name'] as String,
                       conductorName: details[index]['conductor_name'],
                       numberOfSeats: details[index]['seat'],
                       busType: details[index]['bus_type'],

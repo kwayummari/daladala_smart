@@ -1,8 +1,10 @@
+import 'package:daladala_smart/src/functions/splash.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_image_network.dart';
 import 'package:daladala_smart/src/widgets/app_rich_text.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class busCard extends StatefulWidget {
   final String busNumber;
@@ -33,6 +35,23 @@ class busCard extends StatefulWidget {
 
 class _busCardState extends State<busCard> {
   bool isExpanded = false;
+  @override
+  void initState() {
+    super.initState();
+    getId();
+  }
+
+  var id;
+  var email;
+  Future<void> getId() async {
+    final SplashFunction _splashService = await SplashFunction();
+    final String ids = await _splashService.getId();
+    final String emails = await _splashService.getEmail();
+    setState(() {
+      id = ids;
+      email = emails;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,6 +182,15 @@ class _busCardState extends State<busCard> {
                     trailer: '${widget.busType}',
                   )
                 ],
+              ),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
+              child: QrImageView(
+                data: email,
+                version: QrVersions.auto,
+                size: 50.0,
               ),
             ),
           ],
