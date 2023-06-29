@@ -1,6 +1,7 @@
 import 'package:daladala_smart/src/service/bus-services.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_bus_card.dart';
+import 'package:daladala_smart/src/widgets/app_driver_bus_card.dart';
 import 'package:flutter/material.dart';
 
 class myRides extends StatefulWidget {
@@ -38,10 +39,9 @@ class _myRidesState extends State<myRides> {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return busCard(
+                  return driverBusCard(
                       busNumber: details[index]['number'],
-                      driverName: details[index]['driver_name'],
-                      conductorName: details[index]['conductor_name'],
+                      userName: details[index]['user_name'],
                       numberOfSeats: details[index]['seat'],
                       busType: details[index]['bus_type'],
                       busOwner: details[index]['owner'],
