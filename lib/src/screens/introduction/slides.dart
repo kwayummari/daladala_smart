@@ -121,12 +121,16 @@ class Slide extends StatelessWidget {
             bottom: 70,
             left: 80,
             right: 80,
-            child: AppButton(
-              onPress: () => SlideFunction().login(context),
-              label: "Travel Now",
-              borderRadius: 20,
-              textColor: AppConst.white,
-              bcolor: AppConst.primary,
+            child: Container(
+              width: 350,
+              height: 55,
+              child: AppButton(
+                onPress: () => SlideFunction().login(context),
+                label: "Travel Now",
+                borderRadius: 20,
+                textColor: AppConst.white,
+                bcolor: AppConst.primary,
+              ),
             ))
       ],
     );

@@ -37,15 +37,17 @@ class _myRidesState extends State<myRides> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return busCard(
-                      busNumber: details[index]['number'],
-                      driverName: details[index]['driver_name'] as String,
-                      conductorName: details[index]['conductor_name'],
-                      numberOfSeats: details[index]['seat'],
-                      busType: details[index]['bus_type'],
-                      busOwner: details[index]['owner'],
-                      time: details[index]['time'],
-                      date: details[index]['date'],
-                      image: details[index]['image']);
+                    busNumber: details[index]['number'],
+                    driverName: details[index]['driver_name'] as String,
+                    conductorName: details[index]['conductor_name'],
+                    numberOfSeats: details[index]['seat'],
+                    busType: details[index]['bus_type'],
+                    busOwner: details[index]['owner'],
+                    time: details[index]['time'],
+                    date: details[index]['date'],
+                    image: details[index]['image'],
+                    isHistory: true,
+                  );
                 },
                 itemCount: details.length != 0 ? details.length : null,
               ),

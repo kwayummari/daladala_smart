@@ -45,7 +45,7 @@ class _historyState extends State<history> {
                       busOwner: details[index]['owner'],
                       time: details[index]['time'],
                       date: details[index]['date'],
-                      image: details[index]['image']);
+                      image: details[index]['image'], isHistory: true,);
                 },
                 itemCount: details.length != 0 ? details.length : null,
               ),

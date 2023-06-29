@@ -18,6 +18,7 @@ class busCard extends StatefulWidget {
   final String time;
   final String date;
   final String image;
+  final bool isHistory;
 
   const busCard({
     required this.busNumber,
@@ -29,6 +30,7 @@ class busCard extends StatefulWidget {
     required this.time,
     required this.date,
     required this.image,
+    required this.isHistory,
   });
 
   @override
@@ -188,7 +190,8 @@ class _busCardState extends State<busCard> {
                 ],
               ),
             ),
-            AnimatedOpacity(
+            if(widget.isHistory == false)
+             AnimatedOpacity(
               duration: const Duration(milliseconds: 500),
               opacity: isExpanded ? 1.0 : 0.0,
               child: QrImageView(
