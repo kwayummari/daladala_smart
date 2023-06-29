@@ -1,6 +1,6 @@
 import 'package:daladala_smart/src/api/apis.dart';
 import 'package:flutter/material.dart';
-class busService {
+class qrService {
   Api api = Api();
 
   Future getBus(BuildContext context, String destination, String direction,

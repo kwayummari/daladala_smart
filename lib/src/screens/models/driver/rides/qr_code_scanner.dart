@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/service/check-qr.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -42,8 +43,8 @@ class _QRScannerPageState extends State<QRScannerPage> {
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      final busHoursService _busesHoursService = await busHoursService();
+    controller.scannedDataStream.listen((scanData) async{
+      final qrService _busesHoursService = await qrService();
     final List busesHoursList =
         await _busesHoursService.getBusHours(context, widget.id);
     setState(() {
