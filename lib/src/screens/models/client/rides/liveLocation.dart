@@ -24,7 +24,7 @@ class _liveLocationState extends State<liveLocation> {
   void initState() {
     super.initState();
     getYourLocation();
-    Timer.periodic(Duration(seconds: 5), (timer) {
+    Timer.periodic(Duration(seconds: 20), (timer) {
       getBusLocation();
     });
   }
