@@ -1,3 +1,4 @@
+import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -18,11 +19,14 @@ class _QRScannerPageState extends State<QRScannerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppBaseScreen(
       appBar: AppBar(
         title: Text('QR Scanner'),
       ),
-      body: Column(
+      backgroundAuth: false,
+      backgroundImage: false,
+      isvisible: false,
+      child: Column(
         children: [
           Expanded(
             flex: 5,

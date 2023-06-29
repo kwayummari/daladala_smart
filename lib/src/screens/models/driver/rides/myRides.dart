@@ -1,5 +1,6 @@
 import 'package:daladala_smart/src/service/bus-services.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_driver_bus_card.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
@@ -45,7 +46,8 @@ class _driverMyRidesState extends State<driverMyRides> {
           ),
           actions: [
             IconButton(
-                onPressed: () => null,
+                onPressed: () =>
+                    Navigator.pushNamed(context, RouteNames.QRScannerPage),
                 icon: Icon(
                   Icons.qr_code_scanner,
                   color: AppConst.white,
