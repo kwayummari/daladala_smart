@@ -4,7 +4,7 @@ import 'package:daladala_smart/src/widgets/app_rich_text.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
-class busCard extends StatefulWidget {
+class driverBusCard extends StatefulWidget {
   final String busNumber;
   final String userName;
   final String numberOfSeats;
@@ -14,7 +14,7 @@ class busCard extends StatefulWidget {
   final String date;
   final String image;
 
-  const busCard({
+  const driverBusCard({
     required this.busNumber,
     required this.userName,
     required this.numberOfSeats,
@@ -26,10 +26,10 @@ class busCard extends StatefulWidget {
   });
 
   @override
-  _busCardState createState() => _busCardState();
+  _driverBusCardState createState() => _driverBusCardState();
 }
 
-class _busCardState extends State<busCard> {
+class _driverBusCardState extends State<driverBusCard> {
   bool isExpanded = false;
 
   @override
