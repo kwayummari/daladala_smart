@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:daladala_smart/src/functions/splash.dart';
 import 'package:daladala_smart/src/utils/app_const.dart';
+import 'package:daladala_smart/src/utils/routes/route-names.dart';
 import 'package:daladala_smart/src/widgets/app_image_network.dart';
 import 'package:daladala_smart/src/widgets/app_rich_text.dart';
 import 'package:daladala_smart/src/widgets/app_text.dart';
@@ -191,7 +192,9 @@ class _busCardState extends State<busCard> {
               ),
             ),
             if(widget.isHistory == false)
-            IconButton(onPressed: () => Navigator.pushNamed(context, routeName), icon: icon)
+            IconButton(onPressed: () => Navigator.pushNamed(context, RouteNames.liveLocation, arguments: {
+                          'busNumber': widget.busNumber.toString(),
+                        },), icon: Icon(Icons.public)),
             if(widget.isHistory == false)
              AnimatedOpacity(
               duration: const Duration(milliseconds: 500),
