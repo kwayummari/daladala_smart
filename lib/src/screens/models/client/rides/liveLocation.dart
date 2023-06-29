@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:daladala_smart/src/service/booking-service.dart';
 import 'package:daladala_smart/src/service/map-serivces.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
@@ -23,6 +25,9 @@ class _liveLocationState extends State<liveLocation> {
     super.initState();
     getYourLocation();
     getBusLocation();
+    Timer.periodic(Duration(seconds: 5), (timer) {
+    getBusLocation();
+  });
   }
 
   Future getYourLocation() async {
