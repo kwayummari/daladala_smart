@@ -58,7 +58,7 @@ class _busCardState extends State<busCard> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
-      height: isExpanded ? 220 : 60,
+      height: isExpanded ? 300 : 60,
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -188,9 +188,9 @@ class _busCardState extends State<busCard> {
               duration: const Duration(milliseconds: 500),
               opacity: isExpanded ? 1.0 : 0.0,
               child: QrImageView(
-                data: email,
+                data: '${id}-${email}-${widget.date}',
                 version: QrVersions.auto,
-                size: 50.0,
+                size: 100.0,
               ),
             ),
           ],
