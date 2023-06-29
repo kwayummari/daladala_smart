@@ -1,17 +1,16 @@
 import 'package:daladala_smart/src/service/bus-services.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
-import 'package:daladala_smart/src/widgets/app_bus_card.dart';
 import 'package:daladala_smart/src/widgets/app_driver_bus_card.dart';
 import 'package:flutter/material.dart';
 
-class myRides extends StatefulWidget {
-  const myRides({Key? key}) : super(key: key);
+class driverMyRides extends StatefulWidget {
+  const driverMyRides({Key? key}) : super(key: key);
 
   @override
-  State<myRides> createState() => _myRidesState();
+  State<driverMyRides> createState() => _driverMyRidesState();
 }
 
-class _myRidesState extends State<myRides> {
+class _driverMyRidesState extends State<driverMyRides> {
   late Future<List> _futureBusList;
 
   @override
