@@ -38,11 +38,19 @@ class _driverMyRidesState extends State<driverMyRides> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: AppText(
-            txt: 'Requested Trios',
+            txt: 'Requested Trips',
             size: 20,
             weight: FontWeight.bold,
             color: AppConst.white,
           ),
+          actions: [
+            IconButton(
+                onPressed: () => null,
+                icon: Icon(
+                  Icons.qr_code_scanner,
+                  color: AppConst.white,
+                ))
+          ],
         ),
         child: details.isEmpty
             ? Container()
