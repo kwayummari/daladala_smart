@@ -1,5 +1,4 @@
 import 'package:daladala_smart/src/utils/app_const.dart';
-import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

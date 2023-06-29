@@ -18,6 +18,7 @@ class liveLocation extends StatefulWidget {
 
 class _liveLocationState extends State<liveLocation> {
   Position? position;
+  Position? busPosition;
   @override
   void initState() {
     super.initState();
@@ -30,9 +31,16 @@ class _liveLocationState extends State<liveLocation> {
     position = await _mapService.determinePosition();
   }
 
+  List locations = [];
   Future getBusLocation() async {
     final bookingService _bookingService = await bookingService();
-    position = await _bookingService.getLiveLocation(context,widget.busNumber);
+    final busLocation =
+        await _bookingService.getLiveLocation(context, widget.busNumber);
+    locations = busLocation.split('-');
+    setState(() {
+      locations = busLocation.split('-');
+      // busPosition!.latitude = double.parse(locations[0]);
+    });
   }
 
   @override
@@ -58,6 +66,16 @@ class _liveLocationState extends State<liveLocation> {
                       icon: BitmapDescriptor.defaultMarker,
                       infoWindow: InfoWindow(
                         title: 'Your Location',
+                        onTap: () => null,
+                      ),
+                    ),
+                    Marker(
+                      markerId: MarkerId("Bus Location"),
+                      position:
+                          LatLng(locations[0], locations[1]),
+                      icon: BitmapDescriptor.defaultMarker,
+                      infoWindow: InfoWindow(
+                        title: 'Bus Location',
                         onTap: () => null,
                       ),
                     ),
