@@ -11,12 +11,11 @@ class myRides extends StatefulWidget {
 }
 
 class _myRidesState extends State<myRides> {
-  late Future<List> _futureBusList;
 
   @override
   void initState() {
     super.initState();
-    _futureBusList = getBuses();
+    getBuses();
   }
 
   List details = [];
