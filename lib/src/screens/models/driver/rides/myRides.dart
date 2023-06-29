@@ -1,6 +1,8 @@
 import 'package:daladala_smart/src/service/bus-services.dart';
+import 'package:daladala_smart/src/utils/app_const.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
 import 'package:daladala_smart/src/widgets/app_driver_bus_card.dart';
+import 'package:daladala_smart/src/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
 class driverMyRides extends StatefulWidget {
@@ -32,6 +34,16 @@ class _driverMyRidesState extends State<driverMyRides> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: AppText(
+            txt: 'Requested Trios',
+            size: 20,
+            weight: FontWeight.bold,
+            color: AppConst.white,
+          ),
+        ),
         child: details.isEmpty
             ? Container()
             : ListView.builder(
