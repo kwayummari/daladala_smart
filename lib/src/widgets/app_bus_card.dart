@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class busCard extends StatefulWidget {
   final String busNumber;
-  final String userName;
+  final String driverName;
+  final String conductorName;
   final String numberOfSeats;
   final String busType;
   final String busOwner;
@@ -16,7 +17,8 @@ class busCard extends StatefulWidget {
 
   const busCard({
     required this.busNumber,
-    required this.userName,
+    required this.driverName,
+    required this.conductorName,
     required this.numberOfSeats,
     required this.busType,
     required this.busOwner,
@@ -92,8 +94,47 @@ class _busCardState extends State<busCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   richText(
-                    header: 'Passenger Name: ',
-                    trailer: '${widget.userName}',
+                    header: 'Bus Driver: ',
+                    trailer: '${widget.driverName}',
+                  )
+                ],
+              ),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  richText(
+                    header: 'Driver\'s Name: ',
+                    trailer: '${widget.driverName}',
+                  )
+                ],
+              ),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  richText(
+                    header: 'Conductor\'s Name: ',
+                    trailer: '${widget.conductorName}',
+                  )
+                ],
+              ),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: isExpanded ? 1.0 : 0.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  richText(
+                    header: 'Bus Owner: ',
+                    trailer: '${widget.driverName}',
                   )
                 ],
               ),
