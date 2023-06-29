@@ -18,7 +18,6 @@ class liveLocation extends StatefulWidget {
 
 class _liveLocationState extends State<liveLocation> {
   Position? position;
-  Position? busPosition;
   @override
   void initState() {
     super.initState();
@@ -39,7 +38,6 @@ class _liveLocationState extends State<liveLocation> {
     locations = busLocation.split('-');
     setState(() {
       locations = busLocation.split('-');
-      // busPosition!.latitude = double.parse(locations[0]);
     });
   }
 
