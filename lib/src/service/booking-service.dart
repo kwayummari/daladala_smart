@@ -11,8 +11,15 @@ class bookingService {
       'date': date.toString(),
       'bus_id': bus_id.toString(),
     };
-    print(data);
     final response = await api.post(context, 'bookings/get_number.php', data);
+    return response;
+  }
+
+  Future getLiveLocation(BuildContext context, String busNumber) async {
+    Map<String, dynamic> data = {
+      'busNumber': busNumber.toString(),
+    };
+    final response = await api.post(context, 'bookings/get_live_location.php', data);
     return response;
   }
 
