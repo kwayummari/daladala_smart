@@ -16,4 +16,5 @@ class RouteNames {
   static const String exploreBuses = '/exploreBuses';
   static const String bookBus = '/bookBus';
   static const String QRScannerPage = '/QRScannerPage';
+  static const String liveLocation = '/liveLocation';
 }

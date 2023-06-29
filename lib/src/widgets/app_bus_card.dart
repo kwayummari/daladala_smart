@@ -191,6 +191,8 @@ class _busCardState extends State<busCard> {
               ),
             ),
             if(widget.isHistory == false)
+            IconButton(onPressed: () => Navigator.pushNamed(context, routeName), icon: icon)
+            if(widget.isHistory == false)
              AnimatedOpacity(
               duration: const Duration(milliseconds: 500),
               opacity: isExpanded ? 1.0 : 0.0,

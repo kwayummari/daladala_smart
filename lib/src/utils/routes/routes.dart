@@ -7,6 +7,7 @@ import 'package:daladala_smart/src/screens/models/client/dashboard/dashboard.dar
 import 'package:daladala_smart/src/screens/models/client/navigation/navigation.dart';
 import 'package:daladala_smart/src/screens/models/client/pricing/pricing.dart';
 import 'package:daladala_smart/src/screens/models/client/profile/profile.dart';
+import 'package:daladala_smart/src/screens/models/client/rides/liveLocation.dart';
 import 'package:daladala_smart/src/screens/models/client/rides/rides.dart';
 import 'package:daladala_smart/src/screens/models/client/searchBus/searchBus.dart';
 import 'package:daladala_smart/src/screens/models/driver/bottomNavigationBarDriver/bottomNavigationBarDriver.dart';
@@ -38,6 +39,13 @@ final Map<String, WidgetBuilder> routes = {
     destination: args?['destination'],
     dire: args?['dire'],
     route: args?['route'],
+  );
+},
+RouteNames.liveLocation: (context) {
+  final Map<String, dynamic>? args =
+      ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+  return liveLocation(
+    busNumber: args?['busNumber'],
   );
 },
 RouteNames.buses: (context) {
