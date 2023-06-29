@@ -1,7 +1,9 @@
 import 'package:daladala_smart/src/service/map-serivces.dart';
 import 'package:daladala_smart/src/widgets/app_base_screen.dart';
+import 'package:daladala_smart/src/widgets/app_map.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class liveLocation extends StatefulWidget {
   final String busNumber;
@@ -27,9 +29,36 @@ class _liveLocationState extends State<liveLocation> {
   @override
   Widget build(BuildContext context) {
     return AppBaseScreen(
-        child: Column(
-          children: [],
-        ),
+        child: FutureBuilder(
+            future: getHome(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: CustomGoogleMap(
+                    initialCameraPosition:
+                        LatLng(position!.latitude, position!.longitude),
+                    markers: Set<Marker>.of([
+                      Marker(
+                        markerId: MarkerId("Your Location"),
+                        position:
+                            LatLng(position!.latitude, position!.longitude),
+                        icon: BitmapDescriptor.defaultMarker,
+                        infoWindow: InfoWindow(
+                          title: 'Your Location',
+                          onTap: () => null,
+                        ),
+                      ),
+                    ]),
+                  ),
+                );
+              }
+            },
+          ),
         isvisible: false,
         backgroundImage: false,
         backgroundAuth: false);
