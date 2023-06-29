@@ -11,7 +11,6 @@ class myRides extends StatefulWidget {
 }
 
 class _myRidesState extends State<myRides> {
-
   @override
   void initState() {
     super.initState();
@@ -21,7 +20,7 @@ class _myRidesState extends State<myRides> {
   List details = [];
   Future<List> getBuses() async {
     final busService _busesService = await busService();
-    final List busesList = await _busesService.getBusById(context);
+    final List busesList = await _busesService.getBusById(context, '0');
     setState(() {
       details = busesList;
     });

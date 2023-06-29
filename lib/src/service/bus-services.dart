@@ -16,11 +16,12 @@ class busService {
     return response;
   }
 
-  Future getBusById(BuildContext context) async {
+  Future getBusById(BuildContext context, String status) async {
     final SplashFunction _splashService = await SplashFunction();
     final String id = await _splashService.getId();
     Map<String, dynamic> data = {
       'id': id.toString(),
+      'status': status.toString(),
     };
     final response = await api.post(context, 'bookings/get_by_id.php', data);
     return response;

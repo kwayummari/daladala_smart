@@ -20,7 +20,7 @@ class _historyState extends State<history> {
   List details = [];
   Future<List> getBuses() async {
     final busService _busesService = await busService();
-    final List busesList = await _busesService.getBusById(context);
+    final List busesList = await _busesService.getBusById(context,'1');
     setState(() {
       details = busesList;
     });
