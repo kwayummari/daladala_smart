@@ -42,7 +42,6 @@ dependencies:
   fluttertoast: ^8.0.9
   hexcolor: ^3.0.1
   bubble: ^1.2.1
-  simple_animations: ^4.2.0
   share_plus: ^6.3.0
   flutter_rating_bar: ^4.0.1
   flutter_launcher_icons: ^0.11.0

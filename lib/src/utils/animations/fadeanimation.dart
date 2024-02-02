@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:simple_animations/simple_animations.dart';
 
-enum AniProp {
-  opacity,
-  translateY,
-}
-
-class FadeAnimation extends StatelessWidget {
+class FadeAnimation extends StatefulWidget {
   final double delay;
   final Widget child;
 
@@ -17,34 +11,41 @@ class FadeAnimation extends StatelessWidget {
       }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final tween = TimelineTween()
-      ..addScene(begin: Duration.zero, end: const Duration(milliseconds: 500))
-          .animate(
-        AniProp.opacity,
-        tween: Tween(begin: 0.0, end: 1.0),
-      )
-          .animate(
-        AniProp.translateY,
-        tween: Tween(begin: -30.0, end: 0.0),
-        curve: Curves.easeOut,
-      );
+  State<FadeAnimation> createState() => _FadeAnimationState();
+}
 
-    return PlayAnimation<TimelineValue>(
-      delay: Duration(milliseconds: (500 * delay).round()),
-      duration: tween.duration,
-      tween: tween,
-      builder: (context, child, animation) => Opacity(
-        opacity: animation.get(AniProp.opacity),
+class _FadeAnimationState extends State<FadeAnimation> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacityAnimation;
+  late Animation<Offset> _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _slideAnimation = Tween<Offset>(begin: const Offset(0, -0.3), end: Offset.zero).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOut,
+    ));
+    _controller.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) => Opacity(
+        opacity: _opacityAnimation.value,
         child: Transform.translate(
-          offset: Offset(
-            0,
-            animation.get(AniProp.translateY),
-          ),
+          offset: _slideAnimation.value,
           child: child,
         ),
       ),
-      child: child,
+      child: widget.child,
     );
   }
 }
