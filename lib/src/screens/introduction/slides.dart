@@ -117,7 +117,7 @@ class Slide extends StatelessWidget {
           ),
         ),
         Positioned(
-            top: 660,
+            // top: 660,
             bottom: 70,
             left: 80,
             right: 80,

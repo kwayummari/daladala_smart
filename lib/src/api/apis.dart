@@ -53,7 +53,7 @@ class Api {
     try {
       final response = await http
           .post(
-            Uri.parse('$baseUrl/$endPoint'),
+            Uri.parse('$baseUrl$endPoint'),
             body: data,
           )
           .timeout(Duration(seconds: 10));
